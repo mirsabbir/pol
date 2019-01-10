@@ -10,7 +10,7 @@
                     <div class="d-flex flex-column m-auto">
                       <div class="stats-small__data text-center">
                         <span class="stats-small__label text-uppercase" style="color:white;">Total User</span>
-                        <h6 class="stats-small__value count my-3" style="color:white;">2,390</h6>
+                        <h6 class="stats-small__value count my-3" style="color:white;">{{count(\App\User::all())}}</h6>
                       </div>
                     
                     </div>
@@ -24,7 +24,7 @@
                     <div class="d-flex flex-column m-auto">
                       <div class="stats-small__data text-center">
                         <span class="stats-small__label text-uppercase" style="color:white;">Total Missing</span>
-                        <h6 class="stats-small__value count my-3" style="color:white;">182</h6>
+                        <h6 class="stats-small__value count my-3" style="color:white;">{{count(\App\Missing::all())}}</h6>
                       </div>
                   
                     </div>
@@ -38,7 +38,7 @@
                     <div class="d-flex flex-column m-auto">
                       <div class="stats-small__data text-center">
                         <span class="stats-small__label text-uppercase" style="color:white;">Total Wanted</span>
-                        <h6 class="stats-small__value count my-3" style="color:white;">8,147</h6>
+                        <h6 class="stats-small__value count my-3" style="color:white;">{{count(\App\Wanted::all())}}</h6>
                       </div>
                       
                     </div>
@@ -52,7 +52,7 @@
                     <div class="d-flex flex-column m-auto">
                       <div class="stats-small__data text-center">
                         <span class="stats-small__label text-uppercase"style="color:white;">Total Journalist</span>
-                        <h6 class="stats-small__value count my-3" style="color:white;">2,413</h6>
+                        <h6 class="stats-small__value count my-3" style="color:white;">{{count(\App\User::where('role',1)->get())}}</h6>
                       </div>
                     
                     </div>
@@ -65,7 +65,7 @@
                     <div class="d-flex flex-column m-auto">
                       <div class="stats-small__data text-center">
                         <span class="stats-small__label text-uppercase" style="color:white;">Criminal record</span>
-                        <h6 class="stats-small__value count my-3" style="color:white;">17,281</h6>
+                        <h6 class="stats-small__value count my-3" style="color:white;">{{count(App\Crecord::all())}}</h6>
                       </div>
                     
                     </div>
@@ -85,73 +85,24 @@
             </div>
             <!-- End Page Header -->
             <div class="row">
+            @foreach(\App\Post::all() as $post)
               <div class="col-lg-3 col-md-6 col-sm-12 mb-4">
                 <div class="card card-small card-post card-post--1">
-                  <div class="card-post__image" style="background-image: url('img/adminpost_1.jpeg');">
+                  <div class="card-post__image" style="background-image: url('/{{$post->image}}');">
                     <div class="card-post__author d-flex">
-                      <a href="#" class="card-post__author-avatar card-post__author-avatar--small" style="background-image: url('img/0.jpg');">Written by Anna Kunis</a>
+                      <a href="#" class="card-post__author-avatar card-post__author-avatar--small" style="background-image: url('/{{$post->user->image}}');">Written by Anna Kunis</a>
                     </div>
                   </div>
                   <div class="card-body">
                     <h5 class="card-title">
-                      <a class="text-fiord-blue" href="#">Conduct at an replied removal an amongst</a>
+                      <a class="text-fiord-blue" href="#">{{$post->title}}</a>
                     </h5>
-                    <p class="card-text d-inline-block mb-3">However venture pursuit he am mr cordial. Forming musical am hearing studied be luckily. But in for determine what would see...</p>
-                    <span class="text-muted">28 February 2019</span>
+                    <p class="card-text d-inline-block mb-3">{{strip_tags(substr($post->body,0,200))}}</p>
+                    <span class="text-muted">{{$post->created_at}}</span>
                   </div>
                 </div>
               </div>
-              <div class="col-lg-3 col-md-6 col-sm-12 mb-4">
-                <div class="card card-small card-post card-post--1">
-                  <div class="card-post__image" style="background-image: url('img/adminpost_2.jpeg');">
-                    <!-- <a href="#" class="card-post__category badge badge-pill badge-info">Travel</a> -->
-                    <div class="card-post__author d-flex">
-                      <a href="#" class="card-post__author-avatar card-post__author-avatar--small" style="background-image: url('img/1.jpg');">Written by James Jamerson</a>
-                    </div>
-                  </div>
-                  <div class="card-body">
-                    <h5 class="card-title">
-                      <a class="text-fiord-blue" href="#">Off tears are day blind smile alone had ready</a>
-                    </h5>
-                    <p class="card-text d-inline-block mb-3">Is at purse tried jokes china ready decay an. Small its shy way had woody downs power. To denoting admitted speaking learning my...</p>
-                    <span class="text-muted">29 February 2019</span>
-                  </div>
-                </div>
-              </div>
-              <div class="col-lg-3 col-md-6 col-sm-12 mb-4">
-                <div class="card card-small card-post card-post--1">
-                  <div class="card-post__image" style="background-image: url('img/adminpost_3.jpeg');">
-                    <!-- <a href="#" class="card-post__category badge badge-pill badge-primary">Technology</a> -->
-                    <div class="card-post__author d-flex">
-                      <a href="#" class="card-post__author-avatar card-post__author-avatar--small" style="background-image: url('img/2.jpg');">Written by Jimmy Jackson</a>
-                    </div>
-                  </div>
-                  <div class="card-body">
-                    <h5 class="card-title">
-                      <a class="text-fiord-blue" href="#">Difficult in delivered extensive at direction</a>
-                    </h5>
-                    <p class="card-text d-inline-block mb-3">Is at purse tried jokes china ready decay an. Small its shy way had woody downs power. To denoting admitted speaking learning my...</p>
-                    <span class="text-muted">29 February 2019</span>
-                  </div>
-                </div>
-              </div>
-              <div class="col-lg-3 col-md-6 col-sm-12 mb-4">
-                <div class="card card-small card-post card-post--1">
-                  <div class="card-post__image" style="background-image: url('img/adminpost_4.jpeg');">
-                    <!-- <a href="#" class="card-post__category badge badge-pill badge-warning">Technology</a> -->
-                    <div class="card-post__author d-flex">
-                      <a href="#" class="card-post__author-avatar card-post__author-avatar--small" style="background-image: url('img/3.jpg');">Written by John James</a>
-                    </div>
-                  </div>
-                  <div class="card-body">
-                    <h5 class="card-title">
-                      <a class="text-fiord-blue" href="#">It so numerous if he may outlived disposal</a>
-                    </h5>
-                    <p class="card-text d-inline-block mb-3">How but sons mrs lady when. Her especially are unpleasant out alteration continuing unreserved ready road market resolution...</p>
-                    <span class="text-muted">29 February 2019</span>
-                  </div>
-                </div>
-              </div>
+              @endforeach
             </div>
             
 @endsection

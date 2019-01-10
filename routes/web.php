@@ -57,13 +57,15 @@ Route::post('/edit-profile',function(\Illuminate\Http\Request $request){
     $user->username = $request->username;
     $user->name = $request->name;
     $user->nid = $request->nid;
+    $user->email = $request->email;
+    $user->city = $request->city;
     $user->save();
-    return redirect('profile');
+    return redirect()->back();
 })->middleware('auth');
 
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/wall', function(){
-    $posts = App\Post::orderBy('created_at', 'desc')->get();
+    $posts = App\Post::orderBy('created_at', 'desc')->with('comments.user')->get();
     return view('wall')->with(['posts'=>$posts]);
 })->middleware('auth');
 
@@ -100,8 +102,31 @@ Route::post('/add-comment', function(\Illuminate\Http\Request $request){
     $comment->user_id = \Auth::id();
     $comment->post_id = $request->id;
     $comment->save();
-    return redirect()->back();
+    return $comment->load('user');
 
+});
+
+
+Route::post('/comment/edit/{comment}', function(\Illuminate\Http\Request $request,\App\Comment $comment){
+    
+    $validatedData = $request->validate([
+        
+        'body' => 'required',
+        
+    ]);
+    
+    $comment->body = $request->body;
+    
+    $comment->save();
+    return $comment->load('user');
+
+});
+
+Route::post('/comment/delete/{comment}', function(\Illuminate\Http\Request $request,\App\Comment $comment){
+    
+   
+    
+    $comment->delete();
 });
 
 Route::get('/posts/{post}', function(\App\Post $post){
@@ -158,4 +183,55 @@ Route::get('/user-list',function(){
 });
 Route::get('/notices-admin',function(){
     return view('notices-admin');
+});
+
+
+Route::post('/users/delete/{user}',function(App\User $user){
+    $user->delete();
+    return redirect()->back();
+});
+
+Route::post('/wanteds/approve/{u}',function(App\Wanted $u){
+    $u->status = 1;;
+    $u->save();
+    return redirect()->back();
+});
+Route::post('/wanteds/delete/{u}',function(App\Wanted $u){
+    $u->status = 0;;
+    $u->save();
+    return redirect()->back();
+});
+
+
+
+Route::post('/add-wanted',function(Illuminate\Http\Request $request){
+    $w = new App\Wanted ;
+    $w->fn = $request->fn;
+    $w->age = $request->age;
+    $w->country = $request->country;
+    $w->city = $request->city;
+    $w->phone = $request->phone;
+    $w->sex = $request->sex;
+    $w->dsc = $request->dsc;
+    $w->eye = $request->eye;
+    $w->skin = $request->skin;
+    $w->height = $request->height;
+    $w->email = $request->email;
+
+    if(!$request->hasFile('image')) abort(404);
+    $file = $request->file('image');
+    $name = time() .'.'. $file->getClientOriginalExtension();
+    $img = \Image::make($file);
+    $img->save($name);
+    $w->image = $name;
+
+    $w->save();
+    return redirect()->back();
+});
+
+
+
+Route::get('/wanteds/{w}',function(App\Wanted $w){
+    
+    return view('member')->with(['w'=>$w]);
 });

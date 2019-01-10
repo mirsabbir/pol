@@ -12,7 +12,7 @@
     <meta name="description" content="Multipurpose Social Network HTML5 Template">
     <meta name="keywords" content="social media, social network, forum, shop, bootstrap, html5, css3, template, responsive, retina ready">
     <!-- ==== Favicon ==== -->
-    <link rel="icon" href="/favicon.png" type="image/png">
+    <!-- <link rel="icon" href="/favicon.png" type="image/png"> -->
     <!-- ==== Google Font ==== -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway:400,500,600,700%7CRoboto:300,400,400i,500,700">
     <!-- ==== Plugins Bundle ==== -->
@@ -20,9 +20,9 @@
     <!-- ==== Main Stylesheet ==== -->
     <link rel="stylesheet" href="/style.css">
     <!-- ==== Responsive Stylesheet ==== -->
-    <link rel="stylesheet" href="css/responsive-../..//style.css">
+    <link rel="stylesheet" href="/css/responsive-style.css">
     <!-- ==== Color Scheme Stylesheet ==== -->
-    <link rel="stylesheet" href="../..//css/colors/color-1.css" id="changeColorScheme">
+    <link rel="stylesheet" href="../../css/colors/color-1.css" id="changeColorScheme">
     <!-- ==== Custom Stylesheet ==== -->
     <link rel="stylesheet" href="/css/custom.css">
     <!-- ==== HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries ==== -->
@@ -34,15 +34,15 @@
     <!-- <link rel="stylesheet" href="/lib/bootstrap/css/bootstrap.min.css" type="text/css"> -->
     <script src="/lib/jquery-3.2.0.min.js"></script>
     <script src="/lib/bootstrap/js/bootstrap.min.js"></script>
-    <link rel="stylesheet" href="..html/lib/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
     <link rel="stylesheet" href="/lib/bootstrap-switch/css/bootstrap-switch.min.css">
     <script src="/lib/bootstrap-switch/js/bootstrap-switch.min.js"></script>
-    <script src="/twemoji.maxcdn.com/twemoji.min.js"></script>
+    <script src="//twemoji.maxcdn.com/twemoji.min.js"></script>
     <script src="/js/lazy-load.min.js"></script>
     <script src="/js/socialyte.min.js"></script>
     <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,600,700" rel="stylesheet">
     <!-- <link rel="stylesheet" href="style_2.css" type="text/css"> -->
-
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 </head>
 <body>
     <!-- Preloader Start -->
@@ -109,8 +109,8 @@
                                     <!-- <i class="fa fa-caret-down"></i> -->
                                 </a>
                                 <ul class="dropdown-menu">
-                                    <li><a href="missing-person.html"><span>Missing Person</span></a></li>
-                                    <li><a href="wanted-person.html"><span>Wanted Person</span></a></li>
+                                    <li><a href="/missings"><span>Missing Person</span></a></li>
+                                    <li><a href="/wanteds"><span>Wanted Person</span></a></li>
                                     <li><a href="criminal_record.html"><span>Criminal Record</span></a></li>
                                     <li><a href="contact_with_journalist.html"><span>Contact with Journalist</span></a></li>
                                 </ul>
@@ -191,7 +191,7 @@
                                         &#x2764; 156 &#x1F603; 54
                                     </div>
                                     @if(\Auth::check())
-                                    <div class="comments">
+                                    <!-- <div class="comments">
                                         <div class="more-comments">View more comments</div>
                                         <ul>
                                             @foreach($post->comments as $comment)
@@ -204,7 +204,120 @@
                                             <input type="hidden" name="id" value="{{$post->id}}">
                                             @csrf
                                         </form>
+                                    </div> -->
+                                
+                                    <div class="comments" id="cm">
+                                        <div class="more-comments">View more comments...</div>
+                                        <ul v-for="comment in comments">
+                                            
+                                            <li :class="'comment-body'+comment.id"><b>@{{comment.user.name}}</b> @{{comment.body}}</li>
+                                            
+                                            <button  class="btn btn-primary" :class="'edt'+comment.id" @click="edit(comment.id,comment.body)">Edit</button> 
+                                            <button class="btn btn-danger" :class="'dlt'+comment.id" @click="dlt(comment.id)">Detete</button>
+                                            
+                                        </ul>
+                                        <!-- <form action="/add-comment" method="post"> -->
+                                            <input v-model="comment" type="text" class="form-control" placeholder="Add a comment" name="body">
+                                            <button @click="submit">Comment</button>
+                                            <!-- <input type="hidden" name="id" value="{{$post->id}}"> -->
+                                            <!-- @csrf -->
+                                        <!-- </form> -->
                                     </div>
+                                    <script src="{{asset('_js/app.js')}}"></script>
+                                    <script>
+                                        var x = new Vue({
+                                            el:'#cm',
+                                            data:{
+                                                'comments':{!! json_encode ($post->comments) !!},
+                                                'comment' : '',
+                                                'id' : {{$post->id}},
+                                                'compose': ''
+                                            },
+                                            methods:{
+                                                submit(){
+                                                    axios.post('/add-comment', {
+                                                        body: x.comment,
+                                                        id: x.id,
+                                                    })
+                                                    .then(function (response) {
+                                                        var d = response.data;
+                                                        console.log(d);
+                                                        x.comments.push(d);
+                                                    })
+                                                    .catch(function (error) {
+                                                        console.log(error);
+                                                    });
+                                                },
+                                                edit(id,body){
+                                                    var e = '.comment-body'+id;
+                                                    var f = '.edt'+id;
+                                                    var g = '.dlt'+id;
+                                                    var y = '<input type="text" class="box'+id+'" v-model="compose" value="'+body+'">';
+                                                    var xo = '<button class="btn btn-primary '+'upd'+id+'" onclick="x.update('+id+')">Update</button>';
+                                                    $(e).after(xo);
+                                                    $(e).after(y);
+                                                    $(e).hide();
+                                                    $(f).hide();
+                                                    $(g).hide();
+                                                    console.log(x.compose);
+                                                    // $('#edit-btn').hide();
+
+                                                },
+                                                dlt(id){
+                                                    var e = '.upd'+id;
+                                                    var f = '.edt'+id;
+                                                    var g = '.dlt'+id;
+                                                    var h = '.box'+id;
+                                                    var i = '.comment-body'+id;
+                                                    $(e).hide();
+                                                    $(h).hide();
+                                                    $(f).hide();
+                                                    $(g).hide();
+                                                    $(i).hide();
+                                                    axios.post('/comment/delete/'+id, {
+                                                    
+                                                    })
+                                                    .then(function (response) {
+                                                        
+                                                        // x.comments.push(d);
+                                                    })
+                                                    .catch(function (error) {
+                                                        console.log(error);
+                                                    });
+                                                },
+                                                update(id){
+                                                    var e = '.upd'+id;
+                                                    var f = '.edt'+id;
+                                                    var g = '.dlt'+id;
+                                                    var h = '.box'+id;
+                                                    var i = '.comment-body'+id;
+                                                    $(e).hide();
+                                                    $(h).hide();
+                                                    $(f).show();
+                                                    $(g).show();
+                                                    $(i).show();
+                                                    axios.post('/comment/edit/'+id, {
+                                                        body: $(h).val(),
+                                                    })
+                                                    .then(function (response) {
+                                                        var d = response.data;
+                                                        console.log(d);
+                                                        $(i).text(d.body);
+                                                        // x.comments.push(d);
+                                                    })
+                                                    .catch(function (error) {
+                                                        console.log(error);
+                                                    });
+                                                    console.log();
+                                                }
+                                            },
+                                            mounted(){
+                                                console.log({!! json_encode ($post->comments) !!});
+                                            }
+                                           
+                                        })
+                                    </script>
+
                                     @endif
                                 </div>
                             </div>

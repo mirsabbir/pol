@@ -1,111 +1,7 @@
+@extends('layouts.admin')
 
-<!doctype html>
-<html class="no-js h-100" lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-    <link rel="stylesheet" id="main-stylesheet" data-version="1.1.0" href="css/admin_styles/shards-dashboards.1.1.0.min.css">
+@section('content')       
 
-  </head>
-  <body class="h-100">
-    
-    <div class="container-fluid">
-      <div class="row">
-        <!-- Main Sidebar -->
-        <aside class="main-sidebar col-12 col-md-3 col-lg-2 px-0">
-          <div class="main-navbar">
-            <nav class="navbar align-items-stretch navbar-light bg-white flex-md-nowrap border-bottom p-0">
-              <a href="home.html" style="margin-left: 35px ; margin-top: 25px; font-weight: bold;">
-                  <span style="color: black">Peal To</span>
-                  <span style="color: #1DA1F2">&nbsp Police</span>
-                </a>
-                
-              <a class="toggle-sidebar d-sm-inline d-md-none d-lg-none">
-                <i class="material-icons">&#xE5C4;</i>
-              </a>
-            </nav>
-          </div>
-          <form action="#" class="main-sidebar__search w-100 border-right d-sm-flex d-md-none d-lg-none">
-            <div class="input-group input-group-seamless ml-3">
-              <div class="input-group-prepend">
-                <div class="input-group-text">
-                  <i class="fas fa-search"></i>
-                </div>
-              </div>
-              <input class="navbar-search form-control" type="text" placeholder="Search for something..." aria-label="Search"> </div>
-          </form>
-          <div class="nav-wrapper">
-            <ul class="nav flex-column">
-              
-              <li class="nav-item">
-                <a class="nav-link " href="admin_components-blog-posts.html">
-                  <i class="material-icons">vertical_split</i>
-                  <span>Users Posts</span>
-                </a>
-              </li>
-            
-              <li class="nav-item">
-                <a class="nav-link " href="admin_user-list.html">
-                  <i class="material-icons">table_chart</i>
-                  <span> User List</span>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link " href="admin-profile-lite.html">
-                  <i class="material-icons">person</i>
-                  <span>Admin Profile</span>
-                </a>
-              </li>
-
-               <li class="nav-item">
-                <a class="nav-link " href="admin_journalist-list.html">
-                  <i class="material-icons">person</i>
-                  <span>Journalist List</span>
-                </a>
-              </li>
-              
-              <li class="nav-item">
-                <a class="nav-link active" href="admin_wanted-list.html">
-                  <i class="material-icons">person</i>
-                  <span>Wanted List</span>
-                </a>
-              </li>
-
-              <li class="nav-item">
-                <a class="nav-link " href="admin_missing-list.html">
-                  <i class="material-icons">person</i>
-                  <span>Missing List</span>
-                </a>
-              </li>
-
-              <li class="nav-item">
-                <a class="nav-link " href="admin_criminal-record.html">
-                  <i class="material-icons">person</i>
-                  <span>Criminal Record</span>
-                </a>
-              </li>
-
-              <li class="nav-item">
-                <a class="nav-link " href="admin_notice.html">
-                  <i class="material-icons">table_chart</i>
-                  <span> Notice</span>
-                </a>
-              </li>
-
-              <li class="nav-item">
-                <a class="nav-link " href="#">
-                  <i class="material-icons">table_chart</i>
-                  <span> Reward List</span>
-                </a>
-              </li>
-          
-            </ul>
-          </div>
-        </aside>
-        <!-- End Main Sidebar -->
-        <main class="main-content col-lg-10 col-md-9 col-sm-12 p-0 offset-lg-2 offset-md-3">
           
 
           <!-- / .main-navbar -->
@@ -123,13 +19,13 @@
 
           <div class="col-sm-10 card card-small mb-4 well " style="margin-bottom: 10px ; margin-left: 90px">
             
-            <form action="/action_page.php" style="padding: 10px">
+            <form action="/add-wanted" method="post" enctype="multipart/form-data" style="padding: 10px">
             <div class="row">
               <div class="col-25">
                 <label for="fname">Full Name :</label>
               </div>
               <div class="col-75">
-                <input type="text" id="fname" name="firstname" placeholder="Full name..">
+                <input type="text" id="fname" name="fn" placeholder="Full name..">
               </div>
             </div>
 
@@ -138,27 +34,20 @@
                 <label for="age">Sex :</label>
               </div>
               <div class="col-75">
-                <input type="radio" name="gender" value="male"> Male
-                <input type="radio" name="gender" value="female"> Female
-                <input type="radio" name="gender" value="other"> Other
+                <input type="radio" name="sex" value="male"> Male
+                <input type="radio" name="sex" value="female"> Female
+                <input type="radio" name="sex" value="other"> Other
               </div>
             </div>
 
-            <div class="row">
-              <div class="col-25">
-                <label for="age">Date of Birth :</label>
-              </div>
-              <div class="col-75">
-                <input type="text" id="lname" name="lastname" placeholder="DD/MM/YEAR">
-              </div>
-            </div>
+            
 
             <div class="row">
               <div class="col-25">
                 <label for="age">Age :</label>
               </div>
               <div class="col-75">
-                <input type="text" id="lname" name="lastname" placeholder="Age..">
+                <input name="age" type="text" id="lname" name="lastname" placeholder="Age..">
               </div>
             </div>
 
@@ -167,7 +56,7 @@
                 <label for="fname">Height :</label>
               </div>
               <div class="col-75">
-                <input type="text" id="fname" name="firstname" placeholder="Height..">
+                <input type="text" id="fname" name="height" placeholder="Height..">
               </div>
             </div>
 
@@ -176,7 +65,7 @@
                 <label for="fname">Skin Color :</label>
               </div>
               <div class="col-75">
-                <input type="text" id="fname" name="firstname" placeholder="Skin Color..">
+                <input type="text" id="fname" name="skin"  placeholder="Skin Color..">
               </div>
             </div>
 
@@ -185,25 +74,18 @@
                 <label for="fname">Eye Color :</label>
               </div>
               <div class="col-75">
-                <input type="text" id="fname" name="firstname" placeholder="Eye Color..">
+                <input name="eye" type="text" id="fname"  placeholder="Eye Color..">
               </div>
             </div>
 
-            <div class="row">
-              <div class="col-25">
-                <label for="fname">Notable sign :</label>
-              </div>
-              <div class="col-75">
-                <input type="text" id="fname" name="firstname" placeholder="Notable sign..">
-              </div>
-            </div>
+           
 
             <div class="row">
               <div class="col-25">
                 <label for="country">City</label>
               </div>
               <div class="col-75">
-                <select id="country" name="country">
+                <select id="country" name="city">
                   <option value="australia">Chadpur</option>
                   <option value="canada">Dhaka</option>
                   <option value="usa">Comilla</option>
@@ -231,27 +113,20 @@
                 <label for="fname">Mobile no :</label>
               </div>
               <div class="col-75">
-                <input type="text" id="fname" name="mobile" placeholder="Mobile..">
+                <input type="text" id="fname" name="phone" placeholder="Mobile..">
+              </div>
+            </div>
+@csrf
+            <div class="row">
+              <div class="col-25">
+                <label for="fname">Details :</label>
+              </div>
+              <div class="col-75">
+                <input type="text" id="fname" name="dsc" placeholder="details..">
               </div>
             </div>
 
-            <div class="row">
-              <div class="col-25">
-                <label for="fname">Address :</label>
-              </div>
-              <div class="col-75">
-                <input type="text" id="fname" name="Address" placeholder="Address..">
-              </div>
-            </div>
-
-            <div class="row">
-              <div class="col-25">
-                <label for="fname">Reward :</label>
-              </div>
-              <div class="col-75">
-                <input type="text" id="fname" name="Reward" placeholder="Reward...">
-              </div>
-            </div>
+            
 
             <div class="row">
               <div class="col-25">
@@ -297,58 +172,35 @@
                         </tr>
                       </thead>
                       <tbody>
+                      @foreach(App\Wanted::all() as $user)
                         <tr>
                           <td>
                             <div class="card-post__author d-flex">
-                              <a href="member-profile.html" class="card-post__author-avatar card-post__author-avatar--small" style="background-image: url('img/people.jpg');">Written by Anna Kunis</a>
+                              <a href="/wanteds/{{$user->id}}" class="card-post__author-avatar card-post__author-avatar--small" style="background-image: url('/{{$user->image}}');">Written by Anna Kunis</a>
                             </div>
                           </td>
-                          <td>Ali</td>
-                          <td>Kerry</td>
-                          <td>Russian Federation</td>
-                          <td>Gdańsk</td>
-                          <td>107-0339</td>
-                          <td><i class="material-icons">delete_forever</i></td>
+                          <td>{{$user->fn}}</td>
+                          <td>{{$user->ln}}</td>
+                          <td>{{$user->country}}</td>
+                          <td>{{$user->city}}</td>
+                          <td>{{$user->phone}}</td>
+                           @if($user->status==0)
+                          <td><form action="/wanteds/approve/{{$user->id}}" method="post">
+                          @csrf
+                         
+                          <button type="submit">Approve</button>
+                          
+                          </form></td>
+                          @else
+                          <td><form action="/wanteds/delete/{{$user->id}}" method="post">
+                          @csrf
+                         
+                          <button type="submit">Hide</button>
+                          
+                          </form></td>
+                          @endif
                         </tr>
-                        <tr>
-                          <td>
-                            <div class="card-post__author d-flex">
-                              <a href="member-profile.html" class="card-post__author-avatar card-post__author-avatar--small" style="background-image: url('img/people.jpg');">Written by Anna Kunis</a>
-                            </div>
-                          </td>
-                          <td>Clark</td>
-                          <td>Angela</td>
-                          <td>Estonia</td>
-                          <td>Borghetto di Vara</td>
-                          <td>1-660-850-1647</td>
-                          <td><i class="material-icons">delete_forever</i></td>
-                        </tr>
-                        <tr>
-                          <td>
-                            <div class="card-post__author d-flex">
-                              <a href="member-profile.html" class="card-post__author-avatar card-post__author-avatar--small" style="background-image: url('img/people.jpg');">Written by Anna Kunis</a>
-                            </div>
-                          </td>
-                          <td>Jerry</td>
-                          <td>Nathan</td>
-                          <td>Cyprus</td>
-                          <td>Braunau am Inn</td>
-                          <td>214-4225</td>
-                          <td><i class="material-icons">delete_forever</i></td>
-                        </tr>
-                        <tr>
-                          <td>
-                            <div class="card-post__author d-flex">
-                              <a href="member-profile.html" class="card-post__author-avatar card-post__author-avatar--small" style="background-image: url('img/people.jpg');">Written by Anna Kunis</a>
-                            </div>
-                          </td>
-                          <td>Colt</td>
-                          <td>Angela</td>
-                          <td>Liberia</td>
-                          <td>Bad Hersfeld</td>
-                          <td>1-848-473-7416</td>
-                          <td><i class="material-icons">delete_forever</i></td>
-                        </tr>
+                        @endforeach
                       </tbody>
                     </table>
                   </div>
@@ -359,9 +211,5 @@
             
           </div>
           
-        </main>
-      </div>
-    </div>
-
-  </body>
-</html>
+      
+    @endsection

@@ -20,9 +20,9 @@
     <!-- ==== Main Stylesheet ==== -->
     <link rel="stylesheet" href="/style.css">
     <!-- ==== Responsive Stylesheet ==== -->
-    <link rel="stylesheet" href="css/responsive-../..//style.css">
+    <link rel="stylesheet" href="/css/responsive-style.css">
     <!-- ==== Color Scheme Stylesheet ==== -->
-    <link rel="stylesheet" href="../..//css/colors/color-1.css" id="changeColorScheme">
+    <link rel="stylesheet" href="/css/colors/color-1.css" id="changeColorScheme">
     <!-- ==== Custom Stylesheet ==== -->
     <link rel="stylesheet" href="/css/custom.css">
     <!-- ==== HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries ==== -->
@@ -63,14 +63,14 @@
                         <!-- Header Nav Links Start -->
                         <ul class="header--nav-links style--1 nav ff--primary">
                             <li class="dropdown">
-                                <a href="home.html">
+                                <a href="/">
                                     <span>Home</span>
                                     <!-- <i class="fa fa-caret-down"></i> -->
                                 </a>
                                 
                             </li>
                             <li class="dropdown">
-                                <a href="wall.html">
+                                <a href="/wall">
                                     <span> Wall </span>
                                     <!-- <i class="fa fa-caret-down"></i> -->
                                 </a>
@@ -84,9 +84,9 @@
                                 </a>
                                 <ul class="dropdown-menu">
                                     <li><a href="/missings"><span>Missing Person</span></a></li>
-                                    <li class="active"><a href="wanted-person.html"><span>Wanted Person</span></a></li>
-                                    <li><a href="criminal_record.html"><span>Criminal Record</span></a></li>
-                                    <li><a href="contact_with_journalist.html"><span>Contact with Journalist</span></a></li>
+                                    <li class="active"><a href="/wanteds"><span>Wanted Person</span></a></li>
+                                    <li><a href="/criminal-record"><span>Criminal Record</span></a></li>
+                                    <li><a href="/contact"><span>Contact with Journalist</span></a></li>
                                 </ul>
                             </li>
                             <li class="dropdown">
@@ -115,8 +115,8 @@
                                     <li><a href="#">Daily</a></li>
                                 </ul>
                             </li>
-                            <li><a href="user_profile.html"><span>Profile</span></a></li>
-                            <li><a href="login.html"><span>Login</span></a></li>
+                            <li><a href="/profile"><span>Profile</span></a></li>
+                            <li><a href="/login"><span>Login</span></a></li>
                         </ul>
                         <!-- Header Nav Links End -->
                     </div>
@@ -146,11 +146,12 @@
                             <!-- Member Items Start -->
                             <div class="member--items well">
                                 <div class="row gutter--15 AdjustRow">
+                                
                                     <div class="col-md-3 col-xs-6 col-xxs-12">
                                         <!-- Member Item Start -->
                                         <div class="member--item online">
                                             <div class="img img-circle">
-                                                <a href="member-profile.html" class="btn-link">
+                                                <a href="" class="btn-link">
                                                      <img src="/img/people.jpg" alt="">
                                                 </a>
                                             </div>

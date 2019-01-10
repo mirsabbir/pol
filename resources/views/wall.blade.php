@@ -20,9 +20,9 @@
     <!-- ==== Main Stylesheet ==== -->
     <link rel="stylesheet" href="/style.css">
     <!-- ==== Responsive Stylesheet ==== -->
-    <link rel="stylesheet" href="css/responsive-../..//style.css">
+    <link rel="stylesheet" href="/css/responsive-style.css">
     <!-- ==== Color Scheme Stylesheet ==== -->
-    <link rel="stylesheet" href="../..//css/colors/color-1.css" id="changeColorScheme">
+    <link rel="stylesheet" href="../../css/colors/color-1.css" id="changeColorScheme">
     <!-- ==== Custom Stylesheet ==== -->
     <link rel="stylesheet" href="/css/custom.css">
     <!-- ==== HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries ==== -->
@@ -34,10 +34,10 @@
     <!-- <link rel="stylesheet" href="/lib/bootstrap/css/bootstrap.min.css" type="text/css"> -->
     <script src="/lib/jquery-3.2.0.min.js"></script>
     <script src="/lib/bootstrap/js/bootstrap.min.js"></script>
-    <link rel="stylesheet" href="..html/lib/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
     <link rel="stylesheet" href="/lib/bootstrap-switch/css/bootstrap-switch.min.css">
     <script src="/lib/bootstrap-switch/js/bootstrap-switch.min.js"></script>
-    <script src="/twemoji.maxcdn.com/twemoji.min.js"></script>
+    <script src="//twemoji.maxcdn.com/twemoji.min.js"></script>
     <script src="/js/lazy-load.min.js"></script>
     <script src="/js/socialyte.min.js"></script>
     <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,600,700" rel="stylesheet">
@@ -284,20 +284,59 @@
                                         <div class="reaction">
                                             &#x2764; 156 &#x1F603; 54
                                         </div>
-                                        <div class="comments">
-                                            <div class="more-comments">View more comments</div>
-                                            <ul>
-                                                @foreach($post->comments as $comment)
-                                                <li><b>{{$comment->user->name}}</b> {{$comment->body}}t</li>
-                                                @endforeach
-                                            </ul>
-                                            <form action="/add-comment" method="post">
-                                                <input type="text" class="form-control" placeholder="Add a comment" name="body">
-                                                <button type="submit">Comment</button>
-                                                <input type="hidden" name="id" value="{{$post->id}}">
-                                                @csrf
-                                            </form>
-                                        </div>
+                                        
+                                    <div class="comments" id="cm">
+                                        <div class="more-comments">View more comments</div>
+                                        <ul v-for="comment in comments">
+                                            
+                                            <li><b>@{{comment.user.name}}</b> @{{comment.body}}</li>
+                                            <input type="text" v-model="compose">
+                                            <button class="btn btn-primary">Edit</button> <button class="btn btn-danger"></button>
+                                        </ul>
+                                        <!-- <form action="/add-comment" method="post"> -->
+                                            <input v-model="comment" type="text" class="form-control" placeholder="Add a comment" name="body">
+                                            <button @click="submit">Comment</button>
+                                            <!-- <input type="hidden" name="id" value="{{$post->id}}"> -->
+                                            <!-- @csrf -->
+                                        <!-- </form> -->
+                                    </div>
+                                    <script src="{{asset('_js/app.js')}}"></script>
+                                    <script>
+                                        var x = new Vue({
+                                            el:'#cm',
+                                            data:{
+                                                'comments':{!! json_encode($post->comments) !!},
+                                                'comment' : '',
+                                                'id' : {{$post->id}}
+                                            },
+                                            methods:{
+                                                submit(){
+                                                    axios.post('/add-comment', {
+                                                        body: x.comment,
+                                                        id: x.id,
+                                                    })
+                                                    .then(function (response) {
+                                                        var d = {
+                                                            user :{
+                                                                name: '{{Auth::user()->name}}'
+                                                            },
+                                                            body: x.comment
+                                                        };
+
+                                                        x.comments.push(d)
+                                                    })
+                                                    .catch(function (error) {
+                                                        console.log(error);
+                                                    });
+                                                }
+                                            },
+                                            mounted(){
+                                                
+                                                console.log({!! json_encode ($post->comments) !!});
+                                            }
+                                           
+                                        })
+                                    </script>
                                     </div>
                                 </div>
                             </div>

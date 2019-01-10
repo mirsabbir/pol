@@ -214,7 +214,7 @@
                             <label for="fname">Mobile no :</label>
                           </div>
                           <div class="col-75-form">
-                            <input type="number" id="fname" name="mobile" value="{{$user->mobile}}">
+                            <input type="text" id="fname" name="mobile" value="{{$user->mobile}}">
                           </div>
                         </div>
 
