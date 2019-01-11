@@ -1,7 +1,7 @@
 @extends('layouts.admin')
 
 @section('content')  
-        <main class="main-content col-lg-10 col-md-9 col-sm-12 p-0 offset-lg-2 offset-md-3">
+      
 
           <!-- / .main-navbar -->
           <div class="main-content-container container-fluid px-4">
@@ -32,38 +32,29 @@
                       </thead>
 
                       <tbody>
+              <?php $c = 1; ?>
+                      @foreach(App\Notice::all() as $n)
+                        <tr>
+                          <td>{{$c++}}</td>
+                          <td>{{$n->file}}</td>
+                          <td>
+                            <form action="/notices/delete/{{$n->id}}" method ="post">
+                              @csrf
+                              <button type="submit">delete</button>
 
-
-                        <tr>
-                          <td>1</td>
-                          <td>First Notice</td>
-                          <td><i class="material-icons">delete_forever</i></td>
+                            </form>
+                          </td>
                         </tr>
-                        <tr>
-                          <td>2</td>
-                          <td>Second Notice</td>
-                          <td><i class="material-icons">delete_forever</i></td>
-                        </tr>
-                        <tr>
-                          <td>2</td>
-                          <td>Third Notice</td>
-                          <td><i class="material-icons">delete_forever</i></td>
-                        </tr>
-                        <tr>
-                          <td>2</td>
-                          <td>Fourth Notice</td>
-                          <td><i class="material-icons">delete_forever</i></td>
-                        </tr>
-                        <tr>
-                          <td>2</td>
-                          <td>Fifth Notice</td>
-                          <td><i class="material-icons">delete_forever</i></td>
-                        </tr>
-                        <tr>
+                       @endforeach
+                       <tr>
                           <td>#</td>
-                          <td> <input type="file" name="image" /> </td>
-                          <td> <button> Upload File </button> </td>
+                          <form action="/notices/add" method="post" enctype="multipart/form-data">
+                          <td> <input type="file" name="notice" /> </td>
+                          @csrf
+                          <td> <button type="submit"> Upload File </button> </td>
+                          </form>
                         </tr>
+
                       </tbody>
                       
                     </table>
@@ -84,5 +75,5 @@
             
           </div>
           
-        </main>
+
    @endsection('content')

@@ -2,7 +2,7 @@
 @extends('layouts.admin')
 
 @section('content') 
-        <main class="main-content col-lg-10 col-md-9 col-sm-12 p-0 offset-lg-2 offset-md-3">
+        
           
           <!-- / .main-navbar -->
           <div class="main-content-container container-fluid px-4">
@@ -35,58 +35,38 @@
                         </tr>
                       </thead>
                       <tbody>
+                        @foreach(App\Missing::all() as $m)
                         <tr>
                           <td>
                             <div class="card-post__author d-flex">
-                              <a href="member-profile.html" class="card-post__author-avatar card-post__author-avatar--small" style="background-image: url('img/people.jpg');">Written by Anna Kunis</a>
+                              <a href="/missings/{{$m->id}}" class="card-post__author-avatar card-post__author-avatar--small" style="background-image: url('/{{$m->image}}');"></a>
                             </div>
                           </td>
-                          <td>Ali</td>
-                          <td>Kerry</td>
-                          <td>Russian Federation</td>
-                          <td>Gdańsk</td>
-                          <td>107-0339</td>
-                          <td><i class="material-icons">delete_forever</i></td>
-                        </tr>
-                        <tr>
+                          <td>{{$m->fn}}</td>
+                          <td>{{$m->ln}}</td>
+                          <td>{{$m->country}}</td>
+                          <td>{{$m->city}}</td>
+                          <td>{{$m->phone}}</td>
                           <td>
-                            <div class="card-post__author d-flex">
-                              <a href="member-profile.html" class="card-post__author-avatar card-post__author-avatar--small" style="background-image: url('img/people.jpg');">Written by Anna Kunis</a>
-                            </div>
+                          @if($m->status==0)
+                          <td><form action="/missings/approve/{{$m->id}}" method="post">
+                          @csrf
+                         
+                          <button type="submit">Approve</button>
+                          
+                          </form></td>
+                          @else
+                          <td><form action="/missings/delete/{{$m->id}}" method="post">
+                          @csrf
+                         
+                          <button type="submit">Hide</button>
+                          
+                          </form></td>
+                          @endif
                           </td>
-                          <td>Clark</td>
-                          <td>Angela</td>
-                          <td>Estonia</td>
-                          <td>Borghetto di Vara</td>
-                          <td>1-660-850-1647</td>
-                          <td><i class="material-icons">delete_forever</i></td>
                         </tr>
-                        <tr>
-                          <td>
-                            <div class="card-post__author d-flex">
-                              <a href="member-profile.html" class="card-post__author-avatar card-post__author-avatar--small" style="background-image: url('img/people.jpg');">Written by Anna Kunis</a>
-                            </div>
-                          </td>
-                          <td>Jerry</td>
-                          <td>Nathan</td>
-                          <td>Cyprus</td>
-                          <td>Braunau am Inn</td>
-                          <td>214-4225</td>
-                          <td><i class="material-icons">delete_forever</i></td>
-                        </tr>
-                        <tr>
-                          <td>
-                            <div class="card-post__author d-flex">
-                              <a href="member-profile.html" class="card-post__author-avatar card-post__author-avatar--small" style="background-image: url('img/people.jpg');">Written by Anna Kunis</a>
-                            </div>
-                          </td>
-                          <td>Colt</td>
-                          <td>Angela</td>
-                          <td>Liberia</td>
-                          <td>Bad Hersfeld</td>
-                          <td>1-848-473-7416</td>
-                          <td><i class="material-icons">delete_forever</i></td>
-                        </tr>
+                        @endforeach
+                        
                       </tbody>
                     </table>
                   </div>
@@ -97,5 +77,5 @@
             
           </div>
           
-        </main>
+
         @endsection

@@ -185,12 +185,12 @@ Route::get('/notices-admin',function(){
     return view('notices-admin');
 });
 
-
+// user delete
 Route::post('/users/delete/{user}',function(App\User $user){
     $user->delete();
     return redirect()->back();
 });
-
+// wanted approve hide
 Route::post('/wanteds/approve/{u}',function(App\Wanted $u){
     $u->status = 1;;
     $u->save();
@@ -202,6 +202,48 @@ Route::post('/wanteds/delete/{u}',function(App\Wanted $u){
     return redirect()->back();
 });
 
+// --------------------------------
+// missing approve hide
+Route::post('/missings/approve/{u}',function(App\Missing $u){
+    $u->status = 1;;
+    $u->save();
+    return redirect()->back();
+});
+Route::post('/missings/delete/{u}',function(App\Missing $u){
+    $u->status = 0;;
+    $u->save();
+    return redirect()->back();
+});
+// -----------------------------------
+// notices delete
+
+Route::post('/notices/delete/{u}',function(App\Notice $u){
+    $u->delete();
+    return redirect()->back();
+});
+
+// --------------------------
+
+
+// add notices
+Route::post('/notices/add',function(\Illuminate\http\Request $r){
+    $file = $r->file('notice');
+    $file->move(public_path(''),$file->getClientOriginalName());
+    $n = new App\Notice;
+    $n->file = $file->getClientOriginalName();
+    $n->save();
+    return redirect()->back();
+});
+// ---------------------------
+
+
+// criminal record admin
+
+Route::get('criminal-record-admin',function(){
+    return view('criminal-record-admin');
+});
+
+// -------------------------
 
 
 Route::post('/add-wanted',function(Illuminate\Http\Request $request){
@@ -222,6 +264,7 @@ Route::post('/add-wanted',function(Illuminate\Http\Request $request){
     $file = $request->file('image');
     $name = time() .'.'. $file->getClientOriginalExtension();
     $img = \Image::make($file);
+    $img->resize(50,50);
     $img->save($name);
     $w->image = $name;
 
@@ -235,3 +278,15 @@ Route::get('/wanteds/{w}',function(App\Wanted $w){
     
     return view('member')->with(['w'=>$w]);
 });
+Route::get('/missings/{m}',function(App\Wanted $m){
+    
+    return view('member')->with(['w'=>$m]);
+});
+
+// user make journalists
+Route::post('/users/make/{user}',function(App\User $user){
+    $user->role = 1;
+    $user->save();
+    return redirect()->back();
+});
+// ----------------------------

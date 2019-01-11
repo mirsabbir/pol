@@ -42,6 +42,7 @@
                           <th scope="col" class="border-0">City</th>
                           <th scope="col" class="border-0">Phone</th>
                           <th scope="col" class="border-0">Action</th>
+                          <th scope="col" class="border-0">Action</th>
                         </tr>
                       </thead>
                       <tbody>
@@ -58,6 +59,7 @@
                           <td>{{$user->city}}</td>
                           <td>{{$user->mobile}}</td>
                           <td><form action="/users/delete/{{$user->id}}" method="post">@csrf<button type="submit">delete</button></form></td>
+                          <td><form action="/users/make/{{$user->id}}" method="post">@csrf<button type="submit">make journalist</button></form></td>
                         </tr>
                         @endforeach
                         

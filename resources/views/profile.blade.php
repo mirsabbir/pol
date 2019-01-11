@@ -169,7 +169,7 @@
                                             </form>
                                             <form action="/posts/{{$post->id}}/delete" method="post">
                                             @csrf
-                                            <button class="btn btn-primary"> Delete </button>
+                                            <button class="btn btn-danger"> Delete Post </button>
                                             </form>
                                             
                                         </div>
