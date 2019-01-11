@@ -143,7 +143,11 @@
                         <div class="row">
                             
                             <div class=" col-sm-8 col-sm-offset-2 data-post">
-                            <img src="/{{$post->image}}" alt="" >
+                            <form action="/posts/{{$post->id}}/delete" method="post" style="float:right;">
+                            @csrf
+                            <button class="btn btn-danger"> Delete Post </button>
+                            </form>
+                            <!-- <img src="/{{$post->image}}" alt="" > -->
                             <a href="/posts/{{$post->id}}"> <h2  style="text-align:center;border-bottom:3px solid yellow;">{{$post->title}}</h2></a>
                                 {!! $post->body !!}
                                 <div class="reaction">
@@ -167,10 +171,7 @@
                                                 <input type="hidden" name="id" value="{{$post->id}}">
                                                 @csrf
                                             </form>
-                                            <form action="/posts/{{$post->id}}/delete" method="post">
-                                            @csrf
-                                            <button class="btn btn-danger"> Delete Post </button>
-                                            </form>
+                                            
                                             
                                         </div>
                             </div>
