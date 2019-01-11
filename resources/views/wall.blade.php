@@ -132,20 +132,24 @@
                                 </div>
                                 <div class="row">
                                     <div class="col-sm-8 col-sm-offset-2 data-post">
-                                        <img src="/{{$post->image}}" alt="">
+                                        <!-- <img src="/{{$post->image}}" alt=""> -->
                                         <a href="/posts/{{$post->id}}"><h4 style="text-align: center; border-bottom:5px solid yellow;">  {{$post->title}} </h4></a>
                                         {!! $post->body !!}
                                         <div class="reaction">
                                             &#x2764; 156 &#x1F603; 54
                                         </div>
-                                        
-                                    <div class="comments" id="cm">
-                                        <div class="more-comments">View more comments</div>
+                                        @if(\Auth::check())
+                                    
+                                
+                                    <div class="comments" id="cm-{{$post->id}}">
+                                        <div class="more-comments">View more comments...</div>
                                         <ul v-for="comment in comments">
                                             
-                                            <li><b>@{{comment.user.name}}</b> @{{comment.body}}</li>
-                                            <input type="text" v-model="compose">
-                                            <button class="btn btn-primary">Edit</button> <button class="btn btn-danger"></button>
+                                            <li :class="'comment-body'+comment.id"><b>@{{comment.user.name}}</b> @{{comment.body}}</li>
+                                            
+                                            <button  class="btn btn-primary" :class="'edt'+comment.id" @click="edit(comment.id,comment.body)">Edit</button> 
+                                            <button class="btn btn-danger" :class="'dlt'+comment.id" @click="dlt(comment.id)">Detete</button>
+                                            
                                         </ul>
                                         <!-- <form action="/add-comment" method="post"> -->
                                             <input v-model="comment" type="text" class="form-control" placeholder="Add a comment" name="body">
@@ -156,41 +160,103 @@
                                     </div>
                                     <script src="{{asset('_js/app.js')}}"></script>
                                     <script>
-                                        var x = new Vue({
-                                            el:'#cm',
+                                        var x_{{$post->id}} = new Vue({
+                                            el:'#cm-{{$post->id}}',
                                             data:{
-                                                'comments':{!! json_encode($post->comments) !!},
+                                                'comments':{!! json_encode ($post->comments) !!},
                                                 'comment' : '',
-                                                'id' : {{$post->id}}
+                                                'id' : {{$post->id}},
+                                                'compose': ''
                                             },
                                             methods:{
                                                 submit(){
                                                     axios.post('/add-comment', {
-                                                        body: x.comment,
-                                                        id: x.id,
+                                                        body: x_{{$post->id}}.comment,
+                                                        id: x_{{$post->id}}.id,
                                                     })
                                                     .then(function (response) {
-                                                        var d = {
-                                                            user :{
-                                                                name: '{{Auth::user()->name}}'
-                                                            },
-                                                            body: x.comment
-                                                        };
-
-                                                        x.comments.push(d)
+                                                        var d = response.data;
+                                                        console.log(d);
+                                                        x_{{$post->id}}.comments.push(d);
+                                                        x_{{$post->id}}.comment = '';
+                                                        
                                                     })
                                                     .catch(function (error) {
                                                         console.log(error);
                                                     });
+                                                },
+                                                edit(id,body){
+                                                    var e = '.comment-body'+id;
+                                                    var f = '.edt'+id;
+                                                    var g = '.dlt'+id;
+                                                    var y = '<input type="text" class="box'+id+'" v-model="compose" value="'+body+'">';
+                                                    var xo = '<button class="btn btn-primary '+'upd'+id+'" onclick="x_{{$post->id}}.update('+id+')">Update</button>';
+                                                    $(e).after(xo);
+                                                    $(e).after(y);
+                                                    $(e).hide();
+                                                    $(f).hide();
+                                                    $(g).hide();
+                                                    console.log(x_{{$post->id}}.compose);
+                                                    // $('#edit-btn').hide();
+
+                                                },
+                                                dlt(id){
+                                                    var e = '.upd'+id;
+                                                    var f = '.edt'+id;
+                                                    var g = '.dlt'+id;
+                                                    var h = '.box'+id;
+                                                    var i = '.comment-body'+id;
+                                                    $(e).hide();
+                                                    $(h).hide();
+                                                    $(f).hide();
+                                                    $(g).hide();
+                                                    $(i).hide();
+                                                    axios.post('/comment/delete/'+id, {
+                                                    
+                                                    })
+                                                    .then(function (response) {
+                                                        
+                                                        // x.comments.push(d);
+                                                    })
+                                                    .catch(function (error) {
+                                                        console.log(error);
+                                                    });
+                                                },
+                                                update(id){
+                                                    var e = '.upd'+id;
+                                                    var f = '.edt'+id;
+                                                    var g = '.dlt'+id;
+                                                    var h = '.box'+id;
+                                                    var i = '.comment-body'+id;
+                                                    $(e).hide();
+                                                    $(h).hide();
+                                                    $(f).show();
+                                                    $(g).show();
+                                                    $(i).show();
+                                                    axios.post('/comment/edit/'+id, {
+                                                        body: $(h).val(),
+                                                    })
+                                                    .then(function (response) {
+                                                        var d = response.data;
+                                                        console.log(d);
+                                                        $(i).html('<b>'+d.user.name+'</b>&nbsp;'+ d.body);
+                                                        // x.comments.push(d);
+                                                    })
+                                                    .catch(function (error) {
+                                                        console.log(error);
+                                                    });
+                                                    console.log();
                                                 }
                                             },
                                             mounted(){
-                                                
                                                 console.log({!! json_encode ($post->comments) !!});
                                             }
                                            
-                                        })
+                                        });
                                     </script>
+
+                                    @endif
+                                    
                                     </div>
                                 </div>
                             </div>
@@ -198,9 +264,9 @@
                            
 
                             <!--Close #posts-container-->
-                            <div id="loading">
+                            <!-- <div id="loading">
                                 <img src="img/load.gif" alt="loader">
-                            </div>
+                            </div> -->
                         </div>
 
                     </div>

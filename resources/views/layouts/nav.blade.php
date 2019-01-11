@@ -184,10 +184,10 @@
 
     <script src="slider/bootstrap.min.js"></script>
     
-    <script src="../html/js/plugins.min.js"></script> 
+    <script src="/js/plugins.min.js"></script> 
 
     <!-- ==== Main Script ==== -->
-    <script src="../html/js/main.js"></script>
+    <script src="/js/main.js"></script>
 
     </body>
     </html>

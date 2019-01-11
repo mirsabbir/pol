@@ -191,20 +191,7 @@
                                         &#x2764; 156 &#x1F603; 54
                                     </div>
                                     @if(\Auth::check())
-                                    <!-- <div class="comments">
-                                        <div class="more-comments">View more comments</div>
-                                        <ul>
-                                            @foreach($post->comments as $comment)
-                                            <li><b>{{$comment->user->name}}</b> {{$comment->body}}t</li>
-                                            @endforeach
-                                        </ul>
-                                        <form action="/add-comment" method="post">
-                                            <input type="text" class="form-control" placeholder="Add a comment" name="body">
-                                            <button type="submit">Comment</button>
-                                            <input type="hidden" name="id" value="{{$post->id}}">
-                                            @csrf
-                                        </form>
-                                    </div> -->
+                                    
                                 
                                     <div class="comments" id="cm">
                                         <div class="more-comments">View more comments...</div>
@@ -302,7 +289,7 @@
                                                     .then(function (response) {
                                                         var d = response.data;
                                                         console.log(d);
-                                                        $(i).text(d.body);
+                                                        $(i).html('<b>'+d.user.name+'</b>&nbsp;'+ d.body);
                                                         // x.comments.push(d);
                                                     })
                                                     .catch(function (error) {
