@@ -290,3 +290,10 @@ Route::post('/users/make/{user}',function(App\User $user){
     return redirect()->back();
 });
 // ----------------------------
+// notices
+
+Route::get('notices',function(){
+    return view('notices');
+});
+
+// ----------------------------

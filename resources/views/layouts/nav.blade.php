@@ -109,7 +109,7 @@
                                 </ul>
                             </li>
                             <li class="dropdown">
-                                <a href="notice.html">
+                                <a href="notices">
                                     <span>Notices</span>
                                     <!-- <i class="fa fa-caret-down"></i> -->
                                 </a>
