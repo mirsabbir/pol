@@ -135,7 +135,7 @@
                 <div class="table-container">
                     <table class="table-users table" border="0">
 
-                        <h3><a href="missing-person.html" >Missing Person</a></h3>
+                        <h3><a href="/missings" >Missing Person</a></h3>
                         <tbody>
                         <?php $p = 1 ?>
                         @foreach(App\Missing::where('status',1)->latest()->get() as $w)
