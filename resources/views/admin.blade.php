@@ -90,12 +90,12 @@
                 <div class="card card-small card-post card-post--1">
                   <div class="card-post__image" style="background-image: url('/{{$post->image}}');">
                     <div class="card-post__author d-flex">
-                      <a href="#" class="card-post__author-avatar card-post__author-avatar--small" style="background-image: url('/{{$post->user->image}}');">Written by Anna Kunis</a>
+                      <a href="/users/{{$post->user->id}}" class="card-post__author-avatar card-post__author-avatar--small" style="background-image: url('/{{$post->user->image}}');">Written by Anna Kunis</a>
                     </div>
                   </div>
                   <div class="card-body">
                     <h5 class="card-title">
-                      <a class="text-fiord-blue" href="#">{{$post->title}}</a>
+                      <a class="text-fiord-blue" href="/posts/{{$post->id}}">{{$post->title}}</a>
                     </h5>
                     <p class="card-text d-inline-block mb-3">{{strip_tags(substr($post->body,0,200))}}</p>
                     <span class="text-muted">{{$post->created_at}}</span>
