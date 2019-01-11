@@ -135,14 +135,17 @@
                                         <!-- <img src="/{{$post->image}}" alt=""> -->
                                         <a href="/posts/{{$post->id}}"><h4 style="text-align: center; border-bottom:5px solid yellow;">  {{$post->title}} </h4></a>
                                         {!! $post->body !!}
-                                        <div class="reaction">
-                                            &#x2764; 156 &#x1F603; 54
-                                        </div>
+                                        
+                                        @if($post->like)
+                                        {{$post->like}} likes
+                                        @endif
+
+                                        
                                         @if(\Auth::check())
                                     
                                 
                                     <div class="comments" id="cm-{{$post->id}}">
-                                        <div class="more-comments">View more comments...</div>
+                                        
                                         <ul v-for="comment in comments">
                                             
                                             <li :class="'comment-body'+comment.id"><b>@{{comment.user.name}}</b> @{{comment.body}}</li>
