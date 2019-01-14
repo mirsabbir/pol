@@ -19,13 +19,13 @@
 
           <div class="col-sm-10 card card-small mb-4 well " style="margin-bottom: 10px ; margin-left: 90px">
             
-            <form action="/action_page.php" style="padding: 10px">
+            <form action="/add-criminal-record" style="padding: 10px" method="post" enctype="multipart/form-data">
             <div class="row">
               <div class="col-25">
                 <label for="fname">Full Name :</label>
               </div>
               <div class="col-75">
-                <input type="text" id="fname" name="firstname" placeholder="Full name..">
+                <input type="text" id="fname" name="fn" placeholder="Full name..">
               </div>
             </div>
 
@@ -34,27 +34,20 @@
                 <label for="age">Sex :</label>
               </div>
               <div class="col-75">
-                <input type="radio" name="gender" value="male"> Male
-                <input type="radio" name="gender" value="female"> Female
-                <input type="radio" name="gender" value="other"> Other
+                <input type="radio" name="sex" value="male"> Male
+                <input type="radio" name="sex" value="female"> Female
+                <input type="radio" name="sex" value="other"> Other
               </div>
             </div>
 
-            <div class="row">
-              <div class="col-25">
-                <label for="age">Date of Birth :</label>
-              </div>
-              <div class="col-75">
-                <input type="text" id="lname" name="lastname" placeholder="DD/MM/YEAR">
-              </div>
-            </div>
+            
 
             <div class="row">
               <div class="col-25">
                 <label for="age">Age :</label>
               </div>
               <div class="col-75">
-                <input type="text" id="lname" name="lastname" placeholder="Age..">
+                <input name="age" type="text" id="lname" name="lastname" placeholder="Age..">
               </div>
             </div>
 
@@ -63,7 +56,7 @@
                 <label for="fname">Height :</label>
               </div>
               <div class="col-75">
-                <input type="text" id="fname" name="firstname" placeholder="Height..">
+                <input type="text" id="fname" name="height" placeholder="Height..">
               </div>
             </div>
 
@@ -72,7 +65,7 @@
                 <label for="fname">Skin Color :</label>
               </div>
               <div class="col-75">
-                <input type="text" id="fname" name="firstname" placeholder="Skin Color..">
+                <input type="text" id="fname" name="skin"  placeholder="Skin Color..">
               </div>
             </div>
 
@@ -81,25 +74,18 @@
                 <label for="fname">Eye Color :</label>
               </div>
               <div class="col-75">
-                <input type="text" id="fname" name="firstname" placeholder="Eye Color..">
+                <input name="eye" type="text" id="fname"  placeholder="Eye Color..">
               </div>
             </div>
 
-            <div class="row">
-              <div class="col-25">
-                <label for="fname">Notable sign :</label>
-              </div>
-              <div class="col-75">
-                <input type="text" id="fname" name="firstname" placeholder="Notable sign..">
-              </div>
-            </div>
+           
 
             <div class="row">
               <div class="col-25">
                 <label for="country">City</label>
               </div>
               <div class="col-75">
-                <select id="country" name="country">
+                <select id="country" name="city">
                   <option value="australia">Chadpur</option>
                   <option value="canada">Dhaka</option>
                   <option value="usa">Comilla</option>
@@ -112,23 +98,35 @@
               </div>
             </div>
 
+
             <div class="row">
               <div class="col-25">
-                <label for="fname">Address :</label>
+                <label for="fname">Email Address :</label>
               </div>
               <div class="col-75">
-                <input type="text" id="fname" name="Address" placeholder="Address..">
+                <input type="text" id="fname" name="email" placeholder="Email..">
               </div>
             </div>
 
             <div class="row">
               <div class="col-25">
-                <label for="subject">Crime History :</label>
+                <label for="fname">Mobile no :</label>
               </div>
               <div class="col-75">
-                <textarea id="subject" name="subject" placeholder="Description.." style="height:150px"></textarea>
+                <input type="text" id="fname" name="phone" placeholder="Mobile..">
               </div>
             </div>
+@csrf
+            <div class="row">
+              <div class="col-25">
+                <label for="fname">Details :</label>
+              </div>
+              <div class="col-75">
+                <input type="text" id="fname" name="dsc" placeholder="details..">
+              </div>
+            </div>
+
+            
 
             <div class="row">
               <div class="col-25">
@@ -175,58 +173,26 @@
                         </tr>
                       </thead>
                       <tbody>
+                      @foreach(App\Criminal::all() as $m)
                         <tr>
                           <td>
                             <div class="card-post__author d-flex">
-                              <a href="member-profile.html" class="card-post__author-avatar card-post__author-avatar--small" style="background-image: url('img/people.jpg');">Written by Anna Kunis</a>
+                              <a href="/criminals/{{$m->id}}" class="card-post__author-avatar card-post__author-avatar--small" style="background-image: url('/{{$m->image}}');"></a>
                             </div>
                           </td>
-                          <td>Ali</td>
-                          <td>Kerry</td>
-                          <td>Russian Federation</td>
-                          <td>Gdańsk</td>
-                          <td>107-0339</td>
-                          <td><i class="material-icons">delete_forever</i></td>
-                        </tr>
-                        <tr>
+                          <td>{{$m->fn}}</td>
+                          <td>{{$m->ln}}</td>
+                          <td>{{$m->country}}</td>
+                          <td>{{$m->city}}</td>
+                          <td>{{$m->phone}}</td>
                           <td>
-                            <div class="card-post__author d-flex">
-                              <a href="member-profile.html" class="card-post__author-avatar card-post__author-avatar--small" style="background-image: url('img/people.jpg');">Written by Anna Kunis</a>
-                            </div>
+                            <form action="/criminals/delete/{{$m->id}}" method="post">
+                              @csrf
+                              <button type="submit">delete</button>
+                            </form>
                           </td>
-                          <td>Clark</td>
-                          <td>Angela</td>
-                          <td>Estonia</td>
-                          <td>Borghetto di Vara</td>
-                          <td>1-660-850-1647</td>
-                          <td><i class="material-icons">delete_forever</i></td>
                         </tr>
-                        <tr>
-                          <td>
-                            <div class="card-post__author d-flex">
-                              <a href="member-profile.html" class="card-post__author-avatar card-post__author-avatar--small" style="background-image: url('img/people.jpg');">Written by Anna Kunis</a>
-                            </div>
-                          </td>
-                          <td>Jerry</td>
-                          <td>Nathan</td>
-                          <td>Cyprus</td>
-                          <td>Braunau am Inn</td>
-                          <td>214-4225</td>
-                          <td><i class="material-icons">delete_forever</i></td>
-                        </tr>
-                        <tr>
-                          <td>
-                            <div class="card-post__author d-flex">
-                              <a href="member-profile.html" class="card-post__author-avatar card-post__author-avatar--small" style="background-image: url('img/people.jpg');">Written by Anna Kunis</a>
-                            </div>
-                          </td>
-                          <td>Colt</td>
-                          <td>Angela</td>
-                          <td>Liberia</td>
-                          <td>Bad Hersfeld</td>
-                          <td>1-848-473-7416</td>
-                          <td><i class="material-icons">delete_forever</i></td>
-                        </tr>
+                        @endforeach
                       </tbody>
                     </table>
                   </div>

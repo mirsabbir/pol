@@ -327,6 +327,32 @@ Route::post('/add-missing',function(Illuminate\Http\Request $request){
     return redirect('missings');
 });
 
+Route::post('/add-criminal-record',function(Illuminate\Http\Request $request){
+    $w = new App\Criminal ;
+    $w->fn = $request->fn;
+    $w->age = $request->age;
+    $w->country = $request->country;
+    $w->city = $request->city;
+    $w->phone = $request->phone;
+    $w->sex = $request->sex;
+    $w->dsc = $request->dsc;
+    $w->eye = $request->eye;
+    $w->skin = $request->skin;
+    $w->height = $request->height;
+    $w->email = $request->email;
+
+    if(!$request->hasFile('image')) abort(404);
+    $file = $request->file('image');
+    $name = time() .'.'. $file->getClientOriginalExtension();
+    $img = \Image::make($file);
+    $img->resize(200,200);
+    $img->save($name);
+    $w->image = $name;
+
+    $w->save();
+    return redirect()->back();
+});
+
 
 
 Route::get('/wanteds/{w}',function(App\Wanted $w){
@@ -372,4 +398,25 @@ Route::get('like/{p}',function(App\Post $p){
 });
 
 
-// unlike
+// criminal-record
+
+Route::get('criminal-records', function(Illuminate\Http\Request $r){
+    $res = App\Criminal::where('fn','like','%'.$r->qn.'%');
+    if($r->qc){
+        $res = $res->where('city','like','%'.$r->qc.'%');   
+    }
+    if($r->qs){
+        $res = $res->where('sex','like','%'.$r->qs.'%');
+    }
+    
+    return view('criminal-records')->with(['r'=>$r,'ms'=>$res->get()]);
+});
+
+Route::post('criminals/delete/{c}', function(Illuminate\Http\Request $r,App\Criminal $c){
+    $c->delete();
+    return redirect()->back();
+});
+Route::get('criminals/{c}', function(Illuminate\Http\Request $r,App\Criminal $c){
+    
+    return view('member')->with(['w'=>$c]);
+});
