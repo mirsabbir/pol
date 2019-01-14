@@ -68,14 +68,15 @@
                                 </div>
                                 <!-- Profile Item End -->
                                 <!-- Profile Item Start -->
-                                
                                     
+                                    @if($w->dsc)
                                     <div class="profile--info" style="color: white">
                                        
                                         <h3 style="color: white">Description & Reward</h3>
                                     
                                         <p>{{$w->dsc}}</p>
                                     </div>
+                                    @endif
                                
                                 <!-- Profile Item End -->
                                 
