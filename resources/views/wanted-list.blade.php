@@ -86,14 +86,14 @@
               </div>
               <div class="col-75">
                 <select id="country" name="city">
-                  <option value="australia">Chadpur</option>
-                  <option value="canada">Dhaka</option>
-                  <option value="usa">Comilla</option>
-                  <option value="usa">Chittagong</option>
-                  <option value="usa">Sylhet</option>
-                  <option value="usa">Khulna</option>
-                  <option value="usa">Borisal</option>
-                  <option value="usa">Sunamgonj</option>
+                  <option value="Chadpur">Chadpur</option>
+                  <option value="Dhaka">Dhaka</option>
+                  <option value="Comilla">Comilla</option>
+                  <option value="Chittagong">Chittagong</option>
+                  <option value="Sylhet">Sylhet</option>
+                  <option value="Khulna">Khulna</option>
+                  <option value="Borisal">Borisal</option>
+                  <option value="Sunamgonj">Sunamgonj</option>
                 </select>
               </div>
             </div>
@@ -123,6 +123,14 @@
               </div>
               <div class="col-75">
                 <input type="text" id="fname" name="dsc" placeholder="details..">
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-25">
+                <label for="fname">Address :</label>
+              </div>
+              <div class="col-75">
+                <input name="address" type="text" id="fname"  placeholder="Eye Color..">
               </div>
             </div>
 
@@ -163,10 +171,10 @@
                       <thead class="bg-light">
                         <tr style="background-color: black">
                           <th scope="col" class="border-0">#</th>
-                          <th scope="col" class="border-0">First Name</th>
-                          <th scope="col" class="border-0">Last Name</th>
-                          <th scope="col" class="border-0">Country</th>
+                          <th scope="col" class="border-0">Full Name</th>
+                          <th scope="col" class="border-0">Sex</th>
                           <th scope="col" class="border-0">City</th>
+                          <th scope="col" class="border-0">Address</th>
                           <th scope="col" class="border-0">Phone</th>
                           <th scope="col" class="border-0">Action</th>
                         </tr>
@@ -179,10 +187,10 @@
                               <a href="/wanteds/{{$user->id}}" class="card-post__author-avatar card-post__author-avatar--small" style="background-image: url('/{{$user->image}}');">Written by Anna Kunis</a>
                             </div>
                           </td>
-                          <td>{{$user->fn}}</td>
-                          <td>{{$user->ln}}</td>
-                          <td>{{$user->country}}</td>
+                          <td>{{$user->fn}}&nbsp;{{$user->ln}}</td>
+                          <td>{{$user->sex}}</td>
                           <td>{{$user->city}}</td>
+                          <td>{{$user->address}}</td>
                           <td>{{$user->phone}}</td>
                            @if($user->status==0)
                           <td><form action="/wanteds/approve/{{$user->id}}" method="post">

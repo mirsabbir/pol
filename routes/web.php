@@ -287,6 +287,7 @@ Route::post('/add-wanted',function(Illuminate\Http\Request $request){
     $w->skin = $request->skin;
     $w->height = $request->height;
     $w->email = $request->email;
+    $w->address = $request->address;
 
     if(!$request->hasFile('image')) abort(404);
     $file = $request->file('image');
@@ -340,6 +341,7 @@ Route::post('/add-criminal-record',function(Illuminate\Http\Request $request){
     $w->skin = $request->skin;
     $w->height = $request->height;
     $w->email = $request->email;
+    $w->address = $request->address;
 
     if(!$request->hasFile('image')) abort(404);
     $file = $request->file('image');

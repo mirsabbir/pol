@@ -78,6 +78,15 @@
               </div>
             </div>
 
+            <div class="row">
+              <div class="col-25">
+                <label for="fname">Address :</label>
+              </div>
+              <div class="col-75">
+                <input name="address" type="text" id="fname"  placeholder="Eye Color..">
+              </div>
+            </div>
+
            
 
             <div class="row">
@@ -86,14 +95,14 @@
               </div>
               <div class="col-75">
                 <select id="country" name="city">
-                  <option value="australia">Chadpur</option>
-                  <option value="canada">Dhaka</option>
-                  <option value="usa">Comilla</option>
-                  <option value="usa">Chittagong</option>
-                  <option value="usa">Sylhet</option>
-                  <option value="usa">Khulna</option>
-                  <option value="usa">Borisal</option>
-                  <option value="usa">Sunamgonj</option>
+                  <option value="Chadpur">Chadpur</option>
+                  <option value="Dhaka">Dhaka</option>
+                  <option value="Comilla">Comilla</option>
+                  <option value="Chittagong">Chittagong</option>
+                  <option value="Sylhet">Sylhet</option>
+                  <option value="Khulna">Khulna</option>
+                  <option value="Borisal">Borisal</option>
+                  <option value="Sunamgonj">Sunamgonj</option>
                 </select>
               </div>
             </div>
@@ -164,10 +173,10 @@
                       <thead class="bg-light">
                         <tr style="background-color: black">
                           <th scope="col" class="border-0">#</th>
-                          <th scope="col" class="border-0">First Name</th>
-                          <th scope="col" class="border-0">Last Name</th>
-                          <th scope="col" class="border-0">Country</th>
+                          <th scope="col" class="border-0">Full Name</th>
+                          <th scope="col" class="border-0">Sex</th>
                           <th scope="col" class="border-0">City</th>
+                          <th scope="col" class="border-0">Address</th>
                           <th scope="col" class="border-0">Phone</th>
                           <th scope="col" class="border-0">Action</th>
                         </tr>
@@ -180,10 +189,10 @@
                               <a href="/criminals/{{$m->id}}" class="card-post__author-avatar card-post__author-avatar--small" style="background-image: url('/{{$m->image}}');"></a>
                             </div>
                           </td>
-                          <td>{{$m->fn}}</td>
-                          <td>{{$m->ln}}</td>
-                          <td>{{$m->country}}</td>
+                          <td>{{$m->fn}}&nbsp;{{$m->ln}}</td>
+                          <td>{{$m->sex}}</td>
                           <td>{{$m->city}}</td>
+                          <td>{{$m->address}}</td>
                           <td>{{$m->phone}}</td>
                           <td>
                             <form action="/criminals/delete/{{$m->id}}" method="post">

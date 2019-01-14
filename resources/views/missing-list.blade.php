@@ -26,10 +26,10 @@
                       <thead class="bg-light">
                         <tr style="background-color: black">
                           <th scope="col" class="border-0">#</th>
-                          <th scope="col" class="border-0">First Name</th>
-                          <th scope="col" class="border-0">Last Name</th>
-                          <th scope="col" class="border-0">Country</th>
+                          <th scope="col" class="border-0">Full Name</th>
+                          <th scope="col" class="border-0">Sex</th>
                           <th scope="col" class="border-0">City</th>
+                          <th scope="col" class="border-0">Address</th>
                           <th scope="col" class="border-0">Phone</th>
                           <th scope="col" class="border-0">Action</th>
                         </tr>
@@ -42,12 +42,12 @@
                               <a href="/missings/{{$m->id}}" class="card-post__author-avatar card-post__author-avatar--small" style="background-image: url('/{{$m->image}}');"></a>
                             </div>
                           </td>
-                          <td>{{$m->fn}}</td>
-                          <td>{{$m->ln}}</td>
-                          <td>{{$m->country}}</td>
+                          <td>{{$m->fn}}&nbsp;{{$m->ln}}</td>
+                          <td>{{$m->sex}}</td>
                           <td>{{$m->city}}</td>
+                          <td>{{$m->address}}</td>
                           <td>{{$m->phone}}</td>
-                          <td>
+                          
                           @if($m->status==0)
                           <td><form action="/missings/approve/{{$m->id}}" method="post">
                           @csrf
@@ -63,7 +63,7 @@
                           
                           </form></td>
                           @endif
-                          </td>
+                          
                         </tr>
                         @endforeach
                         

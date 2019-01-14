@@ -105,7 +105,7 @@
                                     <li><a href="/missings"><span>Missing Person</span></a></li>
                                     <li><a href="/wanteds"><span>Wanted Person</span></a></li>
                                     <li><a href="/criminal-records"><span>Criminal Record</span></a></li>
-                                    <li><a href="/contact"><span>Contact with Journalist</span></a></li>
+                                    
                                 </ul>
                             </li>
                             <li class="dropdown">
@@ -123,17 +123,7 @@
                                 
                             </li> -->
 
-                            <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                    <span>Crime Statistics</span>
-                                    <!-- <i class="fa fa-caret-down"></i> -->
-                                </a>
-                                <ul class="dropdown-menu">
-                                    <li><a href="#">Monthly</a></li>
-                                    <li><a href="#">Yearly</a></li>
-                                    <li><a href="#">Daily</a></li>
-                                </ul>
-                            </li>
+                            <li><a href="/contact"><span>Contact with Journalist</span></a></li>
                             
                             @if(!Auth::check())
                             <li><a href="/login"><span>Login</span></a></li>
