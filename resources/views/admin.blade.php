@@ -65,7 +65,7 @@
                     <div class="d-flex flex-column m-auto">
                       <div class="stats-small__data text-center">
                         <span class="stats-small__label text-uppercase" style="color:white;">Criminal record</span>
-                        <h6 class="stats-small__value count my-3" style="color:white;">{{count(App\Crecord::all())}}</h6>
+                        <h6 class="stats-small__value count my-3" style="color:white;">{{count(App\Criminal::all())}}</h6>
                       </div>
                     
                     </div>
