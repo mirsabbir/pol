@@ -420,3 +420,11 @@ Route::get('criminals/{c}', function(Illuminate\Http\Request $r,App\Criminal $c)
     
     return view('member')->with(['w'=>$c]);
 });
+
+Route::get('contact',function(){
+return view('contact');
+});
+
+Route::get('inbox/{u}',function(App\User $u){
+return view('inbox');
+});
