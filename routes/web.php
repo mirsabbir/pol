@@ -21,8 +21,13 @@ Route::get('/', function () {
     return view('welcome')->with(['posts' => \App\Post::orderBy('created_at', 'desc')->take(5)->get()]);
 });
 
-Route::get('/profile', function () {
-    return view('profile')->with(['user'=>\Auth::user(), 'posts'=>\Auth::user()->posts()->orderBy('created_at', 'desc')->get()]);
+Route::get('/profile', function (\Illuminate\Http\Request $r) {
+    $user = Auth::user();
+    if($r->q){
+        return view('profile')->with(['r'=>$r,'user'=>$user,'ok'=> \Auth::id()==$user->id, 'posts'=>$user->posts()->orderBy('created_at', 'desc')->where('title','like','%'.$r->q.'%')->with('comments.user')->get()]);
+    }
+    return view('profile')->with(['r'=>$r,'user'=>$user,'ok'=> \Auth::id()==$user->id, 'posts'=>$user->posts()->orderBy('created_at', 'desc')->with('comments.user')->get()]);
+    return view('profile')->with(['user'=>\Auth::user(), 'posts'=>\Auth::user()->posts()->orderBy('created_at', 'desc')->with('comments.user')->get()]);
 
 })->middleware('auth');
 
@@ -60,7 +65,7 @@ Route::post('/edit-profile',function(\Illuminate\Http\Request $request){
     $user->email = $request->email;
     $user->city = $request->city;
     $user->save();
-    return redirect()->back();
+    return redirect('profile');
 })->middleware('auth');
 
 Route::get('/home', 'HomeController@index')->name('home');
@@ -130,20 +135,43 @@ Route::post('/comment/delete/{comment}', function(\Illuminate\Http\Request $requ
 });
 
 Route::get('/posts/{post}', function(\App\Post $post){
-    return view('post')->with(['post'=>$post]);
+    $r = $post->load('comments.user');
+    return view('post')->with(['post'=>$r]);
 });
 
-Route::get('/users/{user}', function(\App\User $user){
+Route::get('/users/{user}', function(Illuminate\Http\Request $r,\App\User $user){
     if(\Auth::id()==$user->id) return redirect('/profile');
-    return view('user')->with(['user'=>$user,'ok'=> \Auth::id()==$user->id, 'posts'=>$user->posts()->orderBy('created_at', 'desc')->get()]);
+    if($r->q){
+        return view('user')->with(['r'=>$r,'user'=>$user,'ok'=> \Auth::id()==$user->id, 'posts'=>$user->posts()->orderBy('created_at', 'desc')->where('title','like','%'.$r->q.'%')->with('comments.user')->get()]);
+    }
+    return view('user')->with(['r'=>$r,'user'=>$user,'ok'=> \Auth::id()==$user->id, 'posts'=>$user->posts()->orderBy('created_at', 'desc')->with('comments.user')->get()]);
 });
 
-Route::get('/missings',function(){
-    return view('missings');
+Route::get('/missings',function(Illuminate\Http\Request $r){
+    
+    $res = App\Missing::where('status',1)->where('fn','like','%'.$r->qn.'%');
+    
+    if($r->qc){
+        $res = $res->where('city','like','%'.$r->qc.'%');   
+    }
+    if($r->qs){
+        $res = $res->where('sex','like','%'.$r->qs.'%');
+    }
+    
+    return view('missings')->with(['r'=>$r,'ms'=>$res->get()]);
 });
 
-Route::get('/wanteds',function(){
-    return view('wanteds');
+Route::get('/wanteds',function(Illuminate\Http\Request $r){
+    $res = App\Wanted::where('fn','like','%'.$r->qn.'%');
+    if($r->qc){
+        $res = $res->where('city','like','%'.$r->qc.'%');   
+    }
+    if($r->qs){
+        $res = $res->where('sex','like','%'.$r->qs.'%');
+    }
+    
+    return view('wanteds')->with(['r'=>$r,'ms'=>$res->get()]);
+    
 });
 
 Route::get('/add-missing',function(){
@@ -264,12 +292,39 @@ Route::post('/add-wanted',function(Illuminate\Http\Request $request){
     $file = $request->file('image');
     $name = time() .'.'. $file->getClientOriginalExtension();
     $img = \Image::make($file);
-    $img->resize(50,50);
+    $img->resize(200,200);
     $img->save($name);
     $w->image = $name;
 
     $w->save();
     return redirect()->back();
+});
+
+Route::post('/add-missing',function(Illuminate\Http\Request $request){
+    $w = new App\Missing ;
+    $w->fn = $request->fn;
+    $w->age = $request->age;
+    $w->country = $request->country;
+    $w->city = $request->city;
+    $w->phone = $request->phone;
+    $w->sex = $request->sex;
+    $w->dsc = $request->dsc;
+    $w->eye = $request->eye;
+    $w->skin = $request->skin;
+    $w->height = $request->height;
+    $w->email = $request->email;
+    $w->address = $request->address;
+
+    if(!$request->hasFile('image')) abort(404);
+    $file = $request->file('image');
+    $name = time() .'.'. $file->getClientOriginalExtension();
+    $img = \Image::make($file);
+    $img->resize(200,200);
+    $img->save($name);
+    $w->image = $name;
+
+    $w->save();
+    return redirect('missings');
 });
 
 
@@ -278,7 +333,7 @@ Route::get('/wanteds/{w}',function(App\Wanted $w){
     
     return view('member')->with(['w'=>$w]);
 });
-Route::get('/missings/{m}',function(App\Wanted $m){
+Route::get('/missings/{m}',function(App\Missing $m){
     
     return view('member')->with(['w'=>$m]);
 });
@@ -297,3 +352,24 @@ Route::get('notices',function(){
 });
 
 // ----------------------------
+
+
+// like
+
+Route::get('like/{p}',function(App\Post $p){
+    if(App\Like::where('user_id',Auth::id())->where('post_id',$p->id)->exists()){
+        $r = App\Like::where('user_id',Auth::id())->where('post_id',$p->id)->first();
+        $r->delete();
+        return -1;
+    } else {
+        $r = new App\Like;
+        $r->l = 0;
+        $r->post_id = $p->id;
+        $r->user_id = Auth::id();
+        $r->save();
+        return 1;
+    }
+});
+
+
+// unlike

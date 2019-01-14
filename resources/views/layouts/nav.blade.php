@@ -13,8 +13,8 @@
         <meta name="keywords" content="social media, social network, forum, shop, bootstrap, html5, css3, template, responsive, retina ready">
 
         <!-- slider -->
-        <link rel="stylesheet" href="slider/style.css">
-        <link rel="stylesheet" href="slider/bootstrap.min.css">
+        <link rel="stylesheet" href="/slider/style.css">
+        <link rel="stylesheet" href="/slider/bootstrap.min.css">
         <!-- slider -->
 
         <!-- ==== Favicon ==== -->
@@ -26,7 +26,7 @@
         <!-- ==== Main Stylesheet ==== -->
         <link rel="stylesheet" href="/style.css">
         <!-- ==== Responsive Stylesheet ==== -->
-        <!-- <link rel="stylesheet" href="css/responsive-../..//style.css"> -->
+        <link rel="stylesheet" href="/css/responsive-style.css">
         <!-- ==== Color Scheme Stylesheet ==== -->
         <link rel="stylesheet" href="/css/colors/color-1.css" id="changeColorScheme">
         <!-- ==== Custom Stylesheet ==== -->
@@ -62,7 +62,7 @@
                                 <span class="icon-bar"></span>
                             </button>
 
-                            <div class="header--navbar-logo navbar-brand">
+                            <div class="header--navbar-logo navbar-brand" style="">
                                 <h2><span style="color: #C7C7C9">Peal To</span>
                                     <span style="color: #1DA1F2">Police</span></h2>
                             </div>
@@ -178,11 +178,11 @@
     </div>
     <!-- Back To Top Button End -->
     <!-- ==== Plugins Bundle ==== -->
-    <script src="slider/jquery-2.2.4.min.js"></script>
+    <script src="/slider/jquery-2.2.4.min.js"></script>
 
-    <script src="slider/popper.min.js"></script>
+    <script src="/slider/popper.min.js"></script>
 
-    <script src="slider/bootstrap.min.js"></script>
+    <script src="/slider/bootstrap.min.js"></script>
     
     <script src="/js/plugins.min.js"></script> 
 

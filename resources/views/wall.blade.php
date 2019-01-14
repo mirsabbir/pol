@@ -135,13 +135,65 @@
                                         <!-- <img src="/{{$post->image}}" alt=""> -->
                                         <a href="/posts/{{$post->id}}"><h4 style="text-align: center; border-bottom:5px solid yellow;">  {{$post->title}} </h4></a>
                                         {!! $post->body !!}
-                                        
-                                        @if($post->like)
-                                        {{$post->like}} likes
-                                        @endif
+                                        @if(\Auth::check())
+                                        <br><br>
+                                        <div id="like-{{$post->id}}">
+                                            <span class="num-{{$post->id}}">@{{likes}}</span> &nbsp; &nbsp; <i class="fa fa-2x fa-thumbs-up" @click="submit" style="cursor:pointer"></i>
+                                            
+                                        </div>
+                                            <script src="{{asset('_js/app.js')}}"></script>
+                                            <script>
+                                                
+                                                var ck_{{$post->id}} = new Vue({
+                                                    el: '#like-{{$post->id}}',
+                                                    data: {
+                                                        likes: {{count($post->likes)}},
+                                                        liked: {{App\Like::where('user_id',Auth::id())->where('post_id',$post->id)->count()}}
+                                                    },
+                                                    methods:{
+                                                        submit(){
+                                                            axios.get('/like/{{$post->id}}', {
+                                                                g: 56,
+                                                            })
+                                                            .then(function (response) {
+                                                                console.log(response.data);
+                                                                ck_{{$post->id}}.likes+=response.data;
+                                                                if(response.data==1){
+                                                                    $('#like-{{$post->id}} i').removeClass('g');
+                                                                    $('#like-{{$post->id}} i').addClass('b');
+                                                                } else{
+                                                                    $('#like-{{$post->id}} i').addClass('g');
+                                                                    $('#like-{{$post->id}} i').removeClass('b');
+                                                                }
+                                                            })
+                                                            .catch(function (error) {
+                                                                console.log(error);
+                                                            });
+                                                        }
+                                                    },
+                                                    mounted(){
+                                                        if(this.liked){
+                                                                    $('#like-{{$post->id}} i').removeClass('g');
+                                                                    $('#like-{{$post->id}} i').addClass('b');
+                                                                } else{
+                                                                    $('#like-{{$post->id}} i').addClass('g');
+                                                                    $('#like-{{$post->id}} i').removeClass('b');
+                                                                }
+                                                    },
+                                                });
+                                            </script>
+                                            <style>
+                                                .g{
+                                                    /* text-shadow: 1px 1px black; */
+                                                    /* border:1px solid black; */
+                                                }
+                                                .b{
+                                                    color:#3b5998;
+                                                }
+                                            </style>
 
                                         
-                                        @if(\Auth::check())
+                                        
                                     
                                 
                                     <div class="comments" id="cm-{{$post->id}}">
