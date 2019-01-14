@@ -55,6 +55,7 @@
                             <!-- Member Items Start -->
                             <div class="member--items">
                                 <div class="row gutter--15 AdjustRow">
+                                    @if($r->qc || $r->qs || $r->qn)
                                     @foreach($ms as $m)
                                     <div class="col-md-4 col-xs-6 col-xxs-12">
                                         <!-- Member Item Start -->
@@ -77,6 +78,7 @@
                                         <!-- Member Item End -->
                                     </div>
                                     @endforeach
+                                    @endif
                                     
                                 </div>
                             </div>

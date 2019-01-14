@@ -25,10 +25,10 @@
                       <thead class="bg-light">
                         <tr style="background-color: black">
                           <th scope="col" class="border-0">#</th>
-                          <th scope="col" class="border-0">First Name</th>
-                          <th scope="col" class="border-0">Last Name</th>
-                          <th scope="col" class="border-0">Country</th>
+                          <th scope="col" class="border-0">Full Name</th>
+                          <th scope="col" class="border-0">Sex</th>
                           <th scope="col" class="border-0">City</th>
+                          <th scope="col" class="border-0">Address</th>
                           <th scope="col" class="border-0">Phone</th>
                           <th scope="col" class="border-0">Action</th>
                         </tr>
@@ -42,10 +42,10 @@
                               <a href="/users/{{$user->id}}" class="card-post__author-avatar card-post__author-avatar--small" style="background-image: url('/{{$user->image}}');">Written by Anna Kunis</a>
                             </div>
                           </td>
-                          <td>{{$user->name}}</td>
-                          <td>{{$user->name}}</td>
-                          <td>{{$user->country}}</td>
+                          <td>{{$user->name}}&nbsp;{{$user->name}}</td>
+                          <td>{{$user->sex}}</td>
                           <td>{{$user->city}}</td>
+                          <td>{{$user->address}}</td>
                           <td>{{$user->mobile}}</td>
                           <td><form action="/users/delete/{{$user->id}}" method="post">@csrf<button type="submit">delete</button></form></td>
                         </tr>
