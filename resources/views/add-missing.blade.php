@@ -85,7 +85,7 @@
                     <label for="country">City</label>
                   </div>
                   <div class="col-75-form">
-                    <select id="country" name="country">
+                    <select id="country" name="city">
                       <option value="Chadpur">Chadpur</option>
                       <option value="Dhaka">Dhaka</option>
                       <option value="Comilla">Comilla</option>

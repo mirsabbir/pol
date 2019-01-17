@@ -54,7 +54,7 @@
 						</div>
 
 						<div>
-							<a href="#" class="txt1">
+							<a href="/password/reset" class="txt1">
 								Forgot Password?
 							</a>
 						</div>

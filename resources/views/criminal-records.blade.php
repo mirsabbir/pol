@@ -17,7 +17,7 @@
                         <form>
                           <div class="inner-form">
 
-                                <div class="input-field first-wrap">
+                                <div class="input-field second-wrap">
                                   <input id="search" name="qn" type="text" placeholder="Full Name" />
                                 </div>
 
@@ -26,11 +26,11 @@
                                 </div>
 
                                 <div class="input-field second-wrap">
-                                  <input class="datepicker" id="depart" type="number" placeholder="NID number" />
+                                  <input class="datepicker" id="depart" type="number" name="qa" placeholder="Age" />
                                 </div>
 
                                 <div class="input-field second-wrap">
-                                  <input class="datepicker" id="depart" type="text" placeholder="DD/MM/YEAR" />
+                                  <input class="datepicker" id="depart" name="qd" type="text" placeholder="DD/MM/YEAR" />
                                 </div>
 
                                 <div class="input-field second-wrap">
@@ -55,7 +55,7 @@
                             <!-- Member Items Start -->
                             <div class="member--items">
                                 <div class="row gutter--15 AdjustRow">
-                                    @if($r->qc || $r->qs || $r->qn)
+                                    @if($r->qc || $r->qs || $r->qn || $r->qa || $r->qd)
                                     @foreach($ms as $m)
                                     <div class="col-md-4 col-xs-6 col-xxs-12">
                                         <!-- Member Item Start -->

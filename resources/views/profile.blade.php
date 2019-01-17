@@ -110,6 +110,7 @@
             <button style="border-radius: 4px ; width: 190px; margin-top: 5px"> <i class="fa fa-pencil" aria-hidden="true"></i> Update Photo </button>
             </form>
         </div>
+        <a href="/messages">Messages</a>
     </div>
     <div class="content-posts profile-content">
         <div class="banner-profile">
@@ -359,6 +360,8 @@
                             <li><b>Sex : </b> {{$user->sex}} </li>
                             <li><b>Email : </b> {{$user->email}} </li>
                             <li><b>Mobile : </b> {{$user->mobile}} </li>
+                            <li><b>City : </b> {{$user->city}} </li>
+                            <li><b>Address : </b> {{$user->address}} </li>
                             <!-- <li><b>Address : </b> Jalal Nagor, Sylhet. </li> -->
                             <li><b>Description : </b> {{$user->details}}</li>
                         </ul>

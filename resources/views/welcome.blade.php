@@ -78,7 +78,7 @@
                               </div>
                               <div class="card-body">
                                 <h5 class="card-title">
-                                  <a class="text-fiord-blue" href="/posts/{{$post->id}}">{{$post->title}}</a>
+                                  <a class="text-fiord-blue" href="/posts/{{$post->id}}">{{substr($post->title,0,40)}}</a>
                                 </h5>
                                 <p class="card-text d-inline-block mb-3">{!! substr(strip_tags($post->body),0,400) !!}</p>
                                 <span class="text-muted">{{$post->created_at}}</span>

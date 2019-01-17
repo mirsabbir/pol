@@ -29,7 +29,7 @@ Route::get('/profile', function (\Illuminate\Http\Request $r) {
     return view('profile')->with(['r'=>$r,'user'=>$user,'ok'=> \Auth::id()==$user->id, 'posts'=>$user->posts()->orderBy('created_at', 'desc')->with('comments.user')->get()]);
     return view('profile')->with(['user'=>\Auth::user(), 'posts'=>\Auth::user()->posts()->orderBy('created_at', 'desc')->with('comments.user')->get()]);
 
-})->middleware('auth');
+})->middleware(['auth','verified']);
 
 
 Route::get('/home', 'HomeController@index')->name('home');
@@ -44,13 +44,13 @@ Route::post('/dpupload', function(\Illuminate\Http\Request $request){
     $user->image = $name;
     $user->save();
     return redirect()->back();
-})->middleware('auth');
+})->middleware(['auth','verified']);
 
 Auth::routes();
 
 Route::get('/edit-profile',function(){
     return view('edit-profile')->with(['user'=>\Auth::user()]);
-})->middleware('auth');
+})->middleware(['auth','verified']);
 
 
 Route::post('/edit-profile',function(\Illuminate\Http\Request $request){
@@ -64,15 +64,17 @@ Route::post('/edit-profile',function(\Illuminate\Http\Request $request){
     $user->nid = $request->nid;
     $user->email = $request->email;
     $user->city = $request->city;
+    $user->address = $request->address;
+    
     $user->save();
     return redirect('profile');
-})->middleware('auth');
+})->middleware(['auth','verified']);
 
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/wall', function(){
     $posts = App\Post::orderBy('created_at', 'desc')->with('comments.user')->get();
     return view('wall')->with(['posts'=>$posts]);
-})->middleware('auth');
+})->middleware(['auth','verified']);
 
 
 Route::post('/create-post', function(\Illuminate\Http\Request $request){
@@ -93,7 +95,7 @@ Route::post('/create-post', function(\Illuminate\Http\Request $request){
     $post->body = $request->body;
     \Auth::user()->posts()->save($post);
     return  redirect('profile');
-});
+})->middleware(['auth','verified']);;
 
 Route::post('/add-comment', function(\Illuminate\Http\Request $request){
     
@@ -109,7 +111,7 @@ Route::post('/add-comment', function(\Illuminate\Http\Request $request){
     $comment->save();
     return $comment->load('user');
 
-});
+})->middleware(['auth','verified']);;
 
 
 Route::post('/comment/edit/{comment}', function(\Illuminate\Http\Request $request,\App\Comment $comment){
@@ -125,19 +127,19 @@ Route::post('/comment/edit/{comment}', function(\Illuminate\Http\Request $reques
     $comment->save();
     return $comment->load('user');
 
-});
+})->middleware(['auth','verified']);;
 
 Route::post('/comment/delete/{comment}', function(\Illuminate\Http\Request $request,\App\Comment $comment){
     
    
     
     $comment->delete();
-});
+})->middleware(['auth','verified']);;
 
 Route::get('/posts/{post}', function(\App\Post $post){
     $r = $post->load('comments.user');
     return view('post')->with(['post'=>$r]);
-});
+})->middleware(['auth','verified']);;
 
 Route::get('/users/{user}', function(Illuminate\Http\Request $r,\App\User $user){
     if(\Auth::id()==$user->id) return redirect('/profile');
@@ -145,7 +147,7 @@ Route::get('/users/{user}', function(Illuminate\Http\Request $r,\App\User $user)
         return view('user')->with(['r'=>$r,'user'=>$user,'ok'=> \Auth::id()==$user->id, 'posts'=>$user->posts()->orderBy('created_at', 'desc')->where('title','like','%'.$r->q.'%')->with('comments.user')->get()]);
     }
     return view('user')->with(['r'=>$r,'user'=>$user,'ok'=> \Auth::id()==$user->id, 'posts'=>$user->posts()->orderBy('created_at', 'desc')->with('comments.user')->get()]);
-});
+})->middleware(['auth','verified']);;
 
 Route::get('/missings',function(Illuminate\Http\Request $r){
     
@@ -156,6 +158,12 @@ Route::get('/missings',function(Illuminate\Http\Request $r){
     }
     if($r->qs){
         $res = $res->where('sex','like','%'.$r->qs.'%');
+    }
+    if($r->qa){
+        $res = $res->where('age','=',$r->qa);
+    }
+    if($r->qd){
+        $res = $res->where('dob','=',$r->qd);
     }
     
     return view('missings')->with(['r'=>$r,'ms'=>$res->get()]);
@@ -169,66 +177,71 @@ Route::get('/wanteds',function(Illuminate\Http\Request $r){
     if($r->qs){
         $res = $res->where('sex','like','%'.$r->qs.'%');
     }
-    
-    return view('wanteds')->with(['r'=>$r,'ms'=>$res->get()]);
+    if($r->qa){
+        $res = $res->where('age','=',$r->qa);
+    }
+    if($r->qd){
+        $res = $res->where('dob','=',$r->qd);
+    }
+    return view('wanteds')->with(['r'=>$r,'ms'=>$res->paginate(1)]);
     
 });
 
 Route::get('/add-missing',function(){
     return view('add-missing');
-});
+})->middleware(['auth','verified']);;
 Route::post('/posts/{post}/delete',function(\App\Post $post){
     $post->delete();
     return redirect()->back();
-});
+})->middleware(['auth','verified']);;
 
 Route::post('/comments/{comment}/delete',function(\App\Comment $comment){
     $comment->delete();
     return redirect()->back();
-});
+})->middleware(['auth','verified']);;
 
 Route::get('/admin',function(){
     return view('admin');
-});
+})->middleware(['auth','verified']);;
 
 Route::get('/admin-profile',function(){
     return view('admin-profile');
-});
+})->middleware(['auth','verified']);;
 Route::get('/wanted-list',function(){
     return view('wanted-list');
-});
+})->middleware(['auth','verified']);;
 Route::get('/missing-list',function(){
     return view('missing-list');
-});
+})->middleware(['auth','verified']);;
 Route::get('/missing-list',function(){
     return view('missing-list');
-});
+})->middleware(['auth','verified']);;
 Route::get('/journalists',function(){
     return view('journalists');
-});
+})->middleware(['auth','verified']);;
 Route::get('/user-list',function(){
     return view('user-list');
-});
+})->middleware(['auth','verified']);;
 Route::get('/notices-admin',function(){
     return view('notices-admin');
-});
+})->middleware(['auth','verified']);;
 
 // user delete
 Route::post('/users/delete/{user}',function(App\User $user){
     $user->delete();
     return redirect()->back();
-});
+})->middleware(['auth','verified']);;
 // wanted approve hide
 Route::post('/wanteds/approve/{u}',function(App\Wanted $u){
     $u->status = 1;;
     $u->save();
     return redirect()->back();
-});
+})->middleware(['auth','verified']);;
 Route::post('/wanteds/delete/{u}',function(App\Wanted $u){
     $u->status = 0;;
     $u->save();
     return redirect()->back();
-});
+})->middleware(['auth','verified']);;
 
 // --------------------------------
 // missing approve hide
@@ -236,19 +249,19 @@ Route::post('/missings/approve/{u}',function(App\Missing $u){
     $u->status = 1;;
     $u->save();
     return redirect()->back();
-});
+})->middleware(['auth','verified']);;
 Route::post('/missings/delete/{u}',function(App\Missing $u){
     $u->status = 0;;
     $u->save();
     return redirect()->back();
-});
+})->middleware(['auth','verified']);;
 // -----------------------------------
 // notices delete
 
 Route::post('/notices/delete/{u}',function(App\Notice $u){
     $u->delete();
     return redirect()->back();
-});
+})->middleware(['auth','verified']);;
 
 // --------------------------
 
@@ -261,7 +274,7 @@ Route::post('/notices/add',function(\Illuminate\http\Request $r){
     $n->file = $file->getClientOriginalName();
     $n->save();
     return redirect()->back();
-});
+})->middleware(['auth','verified']);;
 // ---------------------------
 
 
@@ -269,7 +282,7 @@ Route::post('/notices/add',function(\Illuminate\http\Request $r){
 
 Route::get('criminal-record-admin',function(){
     return view('criminal-record-admin');
-});
+})->middleware(['auth','verified']);;
 
 // -------------------------
 
@@ -299,7 +312,7 @@ Route::post('/add-wanted',function(Illuminate\Http\Request $request){
 
     $w->save();
     return redirect()->back();
-});
+})->middleware(['auth','verified']);;
 
 Route::post('/add-missing',function(Illuminate\Http\Request $request){
     $w = new App\Missing ;
@@ -326,7 +339,7 @@ Route::post('/add-missing',function(Illuminate\Http\Request $request){
 
     $w->save();
     return redirect('missings');
-});
+})->middleware(['auth','verified']);;
 
 Route::post('/add-criminal-record',function(Illuminate\Http\Request $request){
     $w = new App\Criminal ;
@@ -353,7 +366,7 @@ Route::post('/add-criminal-record',function(Illuminate\Http\Request $request){
 
     $w->save();
     return redirect()->back();
-});
+})->middleware(['auth','verified']);;
 
 
 
@@ -410,6 +423,12 @@ Route::get('criminal-records', function(Illuminate\Http\Request $r){
     if($r->qs){
         $res = $res->where('sex','like','%'.$r->qs.'%');
     }
+    if($r->qa){
+        $res = $res->where('age','=',$r->qa);
+    }
+    if($r->qd){
+        $res = $res->where('dob','=',$r->qd);
+    }
     
     return view('criminal-records')->with(['r'=>$r,'ms'=>$res->get()]);
 });
@@ -428,5 +447,23 @@ return view('contact');
 });
 
 Route::get('inbox/{u}',function(App\User $u){
-return view('inbox');
+return view('inbox')->with(['user'=>$u]);
+});
+
+Auth::routes(['verify' => true]);
+
+Route::post('/inbox/{u}', function(Illuminate\Http\Request $r,App\user $u){
+    $msg = new App\Message;
+    $msg->body = $r->body;
+    $file = $r->f;
+    $name = time().'.'.$file->getClientOriginalExtension();
+    $file->storeAs('',$name,'public');
+    $msg->file = $name;
+    $msg->user_id = $u->id;
+    $msg->save();
+    return redirect()->back();
+});
+
+Route::get('/messages', function(){
+    return view('messages')->with(['msgs' => Auth::user()->messages]);
 });

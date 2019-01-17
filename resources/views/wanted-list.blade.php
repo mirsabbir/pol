@@ -130,7 +130,7 @@
                 <label for="fname">Address :</label>
               </div>
               <div class="col-75">
-                <input name="address" type="text" id="fname"  placeholder="Eye Color..">
+                <input name="address" type="text" id="fname"  placeholder="Address..">
               </div>
             </div>
 

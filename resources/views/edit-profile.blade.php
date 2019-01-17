@@ -40,16 +40,31 @@
                           </div>
                         </div>
 
-                        <div class="row-form">
+                        <!-- <div class="row-form">
                           <div class="col-25-form">
                             <label for="age">National ID :</label>
                           </div>
                           <div class="col-75-form">
                             <input type="number" id="lname" name="nid" value="{{$user->nid}}">
                           </div>
+                        </div> -->
+                        <div class="row-form">
+                          <div class="col-25-form">
+                            <label for="city">City</label>
+                          </div>
+                          <div class="col-75-form">
+                            <input type="text" id="lname" name="city" value="{{$user->city}}">
+                          </div>
                         </div>
 
-
+                        <div class="row-form">
+                          <div class="col-25-form">
+                            <label for="city">Address</label>
+                          </div>
+                          <div class="col-75-form">
+                            <input type="text" id="lname" name="address" value="{{$user->address}}">
+                          </div>
+                        </div>
 
                         <div class="row-form">
                           <div class="col-25-form">

@@ -25,7 +25,7 @@
                                 <div class="row gutter--15 AdjustRow">
                                     
                                     @foreach($ms as $m)
-                                    <div class="col-md-3 col-xs-6 col-xxs-12">
+                                    <div class="col-md-4 col-xs-6 col-xxs-12">
                                         <!-- Member Item Start -->
                                         
                                         <div class="member--item online">
@@ -99,16 +99,8 @@
                                         <div class="col-xs-6 col-xxs-12">
                                             <div class="form-group">
                                                 <label>
-                                                    <span class="text-darker ff--primary fw--500">Age</span>
-                                                    <select  class="form-control form-sm" >
-                                                    <option value="">--</option>
-                                                        <option value="18to25">age range</option>
-                                                        <option value="18to25">18 to 25</option>
-                                                        <option value="25to30">25 to 30</option>
-                                                        <option value="30to35">30 to 35</option>
-                                                        <option value="35to40">35 to 40</option>
-                                                        <option value="40plus">40+</option>
-                                                    </select>
+                                                    <span class="text-darker ff--primary fw--500">Age :</span>
+                                                    <input type="text" name="qa" placeholder="Age">
                                                 </label>
                                             </div>
                                         </div>
@@ -129,7 +121,7 @@
                                             <div class="form-group">
                                                 <label>
                                                     <span class="text-darker ff--primary fw--500">Date of Birth</span>
-                                                    <input style="background-color: #F5F5F5" type="text" placeholder="DD/MM/YEAR">
+                                                    <input style="background-color: #F5F5F5" name="dob" type="text" placeholder="DD/MM/YEAR">
                                                     
                                                 </label>
                                             </div>

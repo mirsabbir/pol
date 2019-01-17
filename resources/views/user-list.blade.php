@@ -53,7 +53,7 @@
                               <a href="/users/{{$user->id}}" class="card-post__author-avatar card-post__author-avatar--small" style="background-image: url('/{{$user->image}}');">Written by Anna Kunis</a>
                             </div>
                           </td>
-                          <td>{{$user->name}}&nbsp;{{$user->name}}</td>
+                          <td>{{$user->name}}</td>
                           <td>{{$user->sex}}</td>
                           <td>{{$user->city}}</td>
                           <td>{{$user->address}}</td>

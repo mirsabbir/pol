@@ -20,12 +20,12 @@
                             </div>
                             <!-- Content Nav End -->
                             <!-- Member Items Start -->
-                            <div class="member--items well">
+                            <div class="member--items ">
                                 <div class="row gutter--15 AdjustRow">
                                 
                                     
                                 @foreach($ms as $m)
-                                    <div class="col-md-3 col-xs-6 col-xxs-12">
+                                    <div class="col-md-4 col-xs-6 col-xxs-12">
                                         <!-- Member Item Start -->
                                         
                                         <div class="member--item online">
@@ -52,15 +52,7 @@
                             </div>
                             <!-- Member Items End -->
                             <!-- Page Count Start -->
-                            <div class="page--count pt--30">
-                                <label class="ff--primary fs--14 fw--500 text-darker">
-                                    <span>Viewing</span>
-                                    <a href="#" class="btn-link"><i class="fa fa-caret-left"></i></a>
-                                    <input type="number" name="page-count" value="01" class="form-control form-sm">
-                                    <a href="#" class="btn-link"><i class="fa fa-caret-right"></i></a>
-                                    <span>of 1</span>
-                                </label>
-                            </div>
+                            {{$ms->links()}}
                             <!-- Page Count End -->
                         </div>
                     </div>
@@ -99,16 +91,8 @@
                                         <div class="col-xs-6 col-xxs-12">
                                             <div class="form-group">
                                                 <label>
-                                                    <span class="text-darker ff--primary fw--500">Age</span>
-                                                    <select  class="form-control form-sm" >
-                                                        <option value="">--</option>
-                                                        <option value="18to25">age range</option>
-                                                        <option value="18to25">18 to 25</option>
-                                                        <option value="25to30">25 to 30</option>
-                                                        <option value="30to35">30 to 35</option>
-                                                        <option value="35to40">35 to 40</option>
-                                                        <option value="40plus">40+</option>
-                                                    </select>
+                                                    <span class="text-darker ff--primary fw--500">Age :</span>
+                                                    <input type="text" name="qa" placeholder="Age">
                                                 </label>
                                             </div>
                                         </div>
@@ -129,7 +113,7 @@
                                             <div class="form-group">
                                                 <label>
                                                     <span class="text-darker ff--primary fw--500">Date of Birth</span>
-                                                    <input style="background-color: #F5F5F5" type="text" placeholder="DD/MM/YEAR">
+                                                    <input style="background-color: #F5F5F5" name="qd" type="text" placeholder="DD/MM/YEAR">
                                                     
                                                 </label>
                                             </div>

@@ -6,7 +6,7 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
-class User extends Authenticatable
+class User extends Authenticatable implements MustVerifyEmail
 {
     use Notifiable;
 
@@ -32,5 +32,8 @@ class User extends Authenticatable
     }
     public function comments(){
         return $this->hasMany('App\Comment');
+    }
+    public function messages(){
+        return $this->hasMany('App\Message');
     }
 }
