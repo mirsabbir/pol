@@ -98,4 +98,7 @@ class AdminController extends Controller
     
         return view('member')->with(['w'=>$c]);
     }
+    public function gd(){
+        return view('gd-admin');
+    }
 }

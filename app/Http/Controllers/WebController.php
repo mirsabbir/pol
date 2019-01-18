@@ -29,4 +29,16 @@ class WebController extends Controller
         $msg->save();
         return redirect()->back();
     }
+    public function gd(){
+        return view('gd');
+    }
+    public function gdSubmit(\Illuminate\Http\Request $r){
+        $g = new \App\GD;
+        $g->name = $r->name;
+        $g->address = $r->address;
+        $g->phone = $r->phone;
+        $g->details = $r->details;
+        $g->save();
+        return redirect()->back();
+    }
 }
