@@ -11,6 +11,9 @@
 	<link rel="stylesheet" type="text/css" href="css/lr_util.css">
 	<link rel="stylesheet" type="text/css" href="css/lr_main.css">
 <!--=========================================================================================-->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
 <body>
 	
@@ -23,14 +26,18 @@
 					</span>
 				</div>
 				@if ($errors->any())
-    <div class="alert alert-danger">
-        <ul>
-            @foreach ($errors->all() as $error)
-                <li>{{ $error }}</li>
-            @endforeach
-        </ul>
-    </div>
-@endif
+					<div class="">
+						<ul>
+							@foreach ($errors->all() as $error)
+								<!-- <li class="text-center">{{ $error }}</li> -->
+								<div class="alert alert-danger fade in">
+									<a href="#" class="close" data-dismiss="alert">&times;</a>
+									<strong>Error!</strong> {{$error}}
+								</div>
+							@endforeach
+						</ul>
+					</div>
+				@endif
 				<form class="login100-form validate-form" method="post" action="/login">
 					@csrf
 					<div class="wrap-input100 validate-input m-b-26" data-validate="Username is required">

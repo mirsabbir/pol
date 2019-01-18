@@ -1,4 +1,10 @@
-@extends('layouts.app')
+
+
+
+
+
+
+@extends('layouts.nav')
 
 @section('content')
 <div class="container">
@@ -44,4 +50,10 @@
         </div>
     </div>
 </div>
+
+<style>
+    .header--nav-links{
+        display:none;
+    }
+</style>
 @endsection

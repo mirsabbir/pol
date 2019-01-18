@@ -105,7 +105,7 @@
                                     <li><a href="/missings"><span>Missing Person</span></a></li>
                                     <li><a href="/wanteds"><span>Wanted Person</span></a></li>
                                     <li><a href="/criminal-records"><span>Criminal Record</span></a></li>
-                                    
+                                    <li><a href="/gd"><span>GD</span></a></li>
                                 </ul>
                             </li>
                             <li class="dropdown">

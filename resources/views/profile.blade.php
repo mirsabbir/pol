@@ -23,7 +23,7 @@
             <input name="q" type="text" placeholder="Search..">
         </form>
         <div class="second-icon menu-icon">
-            <form action="/logout" method="post">
+            <form action="/logout" method="post" >
             <span> <button type="submit" style="background:transparent;border:0;"><span class="hidden-xs hidden-sm">Logout</span> <i class="fa fa-sign-out" aria-hidden="true"></i></button>
             </span>
             @csrf
@@ -64,7 +64,7 @@
                 </ul>
             </div>
         </div> -->
-        <div class="second-icon dropdown menu-icon">
+        <!-- <div class="second-icon dropdown menu-icon">
             <span class="dropdown-toggle" role="button" id="dropdownNotification" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
         <span class="hidden-xs hidden-sm">Notifications</span> <i class="fa fa-bell-o" aria-hidden="true"></i> <span class="badge">2</span>
             </span>
@@ -81,7 +81,7 @@
                 <li role="separator" class="divider"></li>
                 <li><a href="#" title="All notifications">All Notifications</a></li>
             </ul>
-        </div>
+        </div> -->
         
         <div class="second-icon menu-icon">
             <span><a href="/wall" title="Wall"><span class="hidden-xs hidden-sm">Wall</span> <i class="fa fa-database" aria-hidden="true"></i></a>
@@ -90,6 +90,10 @@
         
         <div class="second-icon menu-icon">
             <span><a href="/" title="Home"><span class="hidden-xs hidden-sm">Home</span> <i class="fa fa-home" aria-hidden="true"></i></a>
+            </span>
+        </div>
+        <div class="second-icon menu-icon">
+            <span><a href="/messages" ><span>Messages</span> <i class="fa fa-database" aria-hidden="true"></i></a>
             </span>
         </div>
     </header>
@@ -110,7 +114,7 @@
             <button style="border-radius: 4px ; width: 190px; margin-top: 5px"> <i class="fa fa-pencil" aria-hidden="true"></i> Update Photo </button>
             </form>
         </div>
-        <a href="/messages">Messages</a>
+        
     </div>
     <div class="content-posts profile-content">
         <div class="banner-profile">

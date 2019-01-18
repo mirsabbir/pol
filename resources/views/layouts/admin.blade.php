@@ -87,6 +87,12 @@
                   <span>Criminal Record</span>
                 </a>
               </li>
+              <li class="nav-item">
+                <a class="nav-link " href="/gd-admin">
+                  <i class="material-icons">person</i>
+                  <span>GDs</span>
+                </a>
+              </li>
 
               <li class="nav-item">
                 <a class="nav-link " href="/notices-admin">
