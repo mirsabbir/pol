@@ -19,11 +19,9 @@
                                             {{$u->name}}
                                         </td>
                                         <td>
-                                            Dist : {{$u->city}}
+                                            City : {{$u->city}}
                                         </td>
-                                        <td>
-                                            Area : {{$u->area}}
-                                        </td>
+                                        
                                         <td >
                                             Email : {{$u->email}}
                                         </td>

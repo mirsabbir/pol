@@ -20,6 +20,7 @@ class UserController extends Controller
         if(!$request->hasFile('image')) abort(404);
         $name = time() .'.'. $file->getClientOriginalExtension();
         $img = \Image::make($file);
+        $img->resize(300,300);
         $img->save($name);
         $user = \Auth::user();
         $user->image = $name;
