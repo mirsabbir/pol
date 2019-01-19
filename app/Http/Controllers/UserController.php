@@ -58,7 +58,7 @@ class UserController extends Controller
         $user->delete();
         return redirect()->back();
     }
-    public function approve(App\Wanted $u){
+    public function approve(\App\Wanted $u){
         $u->status = 1;;
         $u->save();
         return redirect()->back();

@@ -104,7 +104,7 @@ class AdminController extends Controller
         
         return view('criminal-records')->with(['r'=>$r,'ms'=>$res->get()]);
     }
-    public function deleteCriminal(Illuminate\Http\Request $r,App\Criminal $c){
+    public function deleteCriminal(\Illuminate\Http\Request $r,\App\Criminal $c){
         $c->delete();
         return redirect()->back();
     }

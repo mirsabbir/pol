@@ -55,7 +55,7 @@ class WantedController extends Controller
         $w->save();
         return redirect()->back();
     }
-    public function show(App\Wanted $w){
+    public function show(\App\Wanted $w){
     
         return view('member')->with(['w'=>$w]);
     }

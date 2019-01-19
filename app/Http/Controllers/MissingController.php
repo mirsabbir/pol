@@ -65,7 +65,7 @@ class MissingController extends Controller
         $w->save();
         return redirect('missings');
     }
-    public function show(App\Missing $m){
+    public function show(\App\Missing $m){
     
         return view('member')->with(['w'=>$m]);
     }
