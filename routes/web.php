@@ -101,5 +101,5 @@ Route::post('/inbox/{u}', 'WebController@messageSave');
 
 
 Route::get('gd', 'WebController@gd');
-Route::post('gd/submit', 'WebControllergdSubmit');
+Route::post('gd/submit', 'WebController@gdSubmit');
 
