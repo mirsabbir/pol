@@ -104,7 +104,7 @@
                                                 </label>
                                             </div>
                                         </div>
-                                        <div class="col-xs-6 col-xxs-12">
+                                        <!-- <div class="col-xs-6 col-xxs-12">
                                             <div class="form-group">
                                                 <label>
                                                     <span class="text-darker ff--primary fw--500">City</span>
@@ -116,7 +116,7 @@
                                                     </select>
                                                 </label>
                                             </div>
-                                        </div>
+                                        </div> -->
                                         <div class="col-xs-12">
                                             <div class="form-group">
                                                 <label>
