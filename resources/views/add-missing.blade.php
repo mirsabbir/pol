@@ -138,12 +138,12 @@
                 </div>
 
 
-                <div class="row">
-                  <div class="col-25">
+                <div class="row-form">
+                  <div class="col-25-form">
                     <label for="fname">Date of Birth :</label>
                   </div>
-                  <div class="col-75">
-                    <input name="dob" type="text" id="fname"  placeholder="DD/MM/YYYY">
+                  <div class="col-75-form">
+                    <input  name="dob" type="text" id="fname"  placeholder="DD/MM/YYYY">
                   </div>
                 </div>
 
