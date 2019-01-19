@@ -42,6 +42,7 @@ class WantedController extends Controller
         $w->height = $request->height;
         $w->email = $request->email;
         $w->address = $request->address;
+        $w->dob = $request->dob;
     
         if(!$request->hasFile('image')) abort(404);
         $file = $request->file('image');

@@ -17,7 +17,7 @@
                         <form>
                           <div class="inner-form">
 
-                                <div class="input-field second-wrap">
+                                <div class="input-field ">
                                   <input id="search" name="qn" type="text" placeholder="Full Name" />
                                 </div>
 

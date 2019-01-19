@@ -51,6 +51,8 @@
                   </div>
                 </div>
 
+
+
                 <div class="row-form">
                   <div class="col-25-form">
                     <label for="fname">Height :</label>
@@ -135,6 +137,16 @@
                   </div>
                 </div>
 
+
+                <div class="row">
+                  <div class="col-25">
+                    <label for="fname">Date of Birth :</label>
+                  </div>
+                  <div class="col-75">
+                    <input name="dob" type="text" id="fname"  placeholder="DD/MM/YYYY">
+                  </div>
+                </div>
+
                 <div class="row-form">
                   <div class="col-25-form">
                     <label for="fname">Photo :</label>
@@ -143,6 +155,7 @@
                     <input type="file" name="image" />
                   </div>
                 </div>
+
 
                 <div class="row-form">
                   <input style="align: center" type="submit" value="Submit">
