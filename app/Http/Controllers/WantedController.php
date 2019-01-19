@@ -20,7 +20,7 @@ class WantedController extends Controller
         if($r->qd){
             $res = $res->where('dob','=',$r->qd);
         }
-        return view('wanteds')->with(['r'=>$r,'ms'=>$res->paginate(1)]);
+        return view('wanteds')->with(['r'=>$r,'ms'=>$res->paginate(9)]);
         
     }
     public function delete(\App\Wanted $u){
