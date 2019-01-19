@@ -6,32 +6,42 @@ use Illuminate\Http\Request;
 
 class AdminController extends Controller
 {
+    
     public function index(){
+        if(\Auth::user()->role!=2) abort(404);
         return view('admin');
     }
     public function adminProfile(){
+        if(\Auth::user()->role!=2) abort(404);
         return view('admin-profile');
     }
     public function wantedList(){
+        if(\Auth::user()->role!=2) abort(404);
         return view('wanted-list');
     }
     public function missingList(){
+        if(\Auth::user()->role!=2) abort(404);
         return view('missing-list');
     }
     public function journalists(){
+        if(\Auth::user()->role!=2) abort(404);
         return view('journalists');
     }
     public function userList(){
+        if(\Auth::user()->role!=2) abort(404);
         return view('user-list');
     }
     public function noticesAdmin(){
+        if(\Auth::user()->role!=2) abort(404);
         return view('notices-admin');
     }
     public function deleteNotice(\App\Notice $u){
+        if(\Auth::user()->role!=2) abort(404);
         $u->delete();
         return redirect()->back();
     }
     public function addNotice(\Illuminate\http\Request $r){
+        if(\Auth::user()->role!=2) abort(404);
         $file = $r->file('notice');
         $file->move(public_path(''),$file->getClientOriginalName());
         $n = new \App\Notice;
@@ -40,9 +50,11 @@ class AdminController extends Controller
         return redirect()->back();
     }
     public function criminalRecord(){
+        if(\Auth::user()->role!=2) abort(404);
         return view('criminal-record-admin');
     }
     public function addCr(\Illuminate\Http\Request $request){
+        if(\Auth::user()->role!=2) abort(404);
         $w = new \App\Criminal ;
         $w->fn = $request->fn;
         $w->age = $request->age;
@@ -70,6 +82,7 @@ class AdminController extends Controller
         return redirect()->back();
     }
     public function makeJournalist(\App\User $user){
+        if(\Auth::user()->role!=2) abort(404);
         $user->role = 1;
         $user->save();
         return redirect()->back();
@@ -100,6 +113,7 @@ class AdminController extends Controller
         return view('member')->with(['w'=>$c]);
     }
     public function gd(){
+        if(\Auth::user()->role!=2) abort(404);
         return view('gd-admin');
     }
 }

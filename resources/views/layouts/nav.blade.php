@@ -73,6 +73,7 @@
 
                         <!-- Header Nav Links Start -->
                         <ul class="header--nav-links style--1 nav ff--primary homenavfloat">
+                            @if(Auth::check() && Auth::user()->role==2)
                             
                             <li class="dropdown">
                                 <a href="/admin">
@@ -81,6 +82,8 @@
                                 </a>
                                 
                             </li>
+                            
+                            @endif
 
                             <li class="dropdown">
                                 <a href="/">

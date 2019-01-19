@@ -17,7 +17,8 @@ class UserController extends Controller
     }
     public function dp(\Illuminate\Http\Request $request){
         $file = $request->image;
-        if(!$request->hasFile('image')) abort(404);
+        
+        //if(!$request->hasFile('image')) abort(404);
         $name = time() .'.'. $file->getClientOriginalExtension();
         $img = \Image::make($file);
         $img->resize(300,300);
