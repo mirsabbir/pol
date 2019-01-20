@@ -82,7 +82,7 @@
                                 </h5>
                                 <?php
                                     $st ='';
-                                    if(ctype_alnum(!preg_match('/[^A-Za-z0-9]/', strip_tags($post->body)))) $st = substr(strip_tags($post->body),0,186);
+                                    if(!preg_match('/[^A-Za-z0-9]/', strip_tags($post->body))) $st = substr(strip_tags($post->body),0,186);
                                     else $st = substr(strip_tags($post->body),0,400);
                                 ?>
                                 <p class="card-text d-inline-block mb-3">{!! $st !!}</p>
