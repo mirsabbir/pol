@@ -90,7 +90,11 @@
             </div>
         </section>
 
-
+<style>
+    footer{
+        display:none;
+    }
+</style>
 
 
 @endsection
