@@ -295,7 +295,7 @@
                                                     .then(function (response) {
                                                         var d = response.data;
                                                         console.log(d);
-                                                        $(i).html('<b>'+d.user.name+'</b>&nbsp;'+ d.body);
+                                                        $(i).html('<b><a href="/users/'+{{Auth::id()}}+'">'+d.user.name+'</a>'+'</b>&nbsp;'+ d.body);
                                                         // x.comments.push(d);
                                                     })
                                                     .catch(function (error) {
