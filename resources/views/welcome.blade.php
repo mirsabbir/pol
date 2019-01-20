@@ -71,7 +71,7 @@
 
                         <h3> Posts: </h3>
                         <?php $p=1; ?>
-                        @foreach($posts as $post)
+                        @foreach(\App\Post::all() as $post)
                         <div class="col-lg-6 col-md-6  mb-4">
                             <div class="card card-small card-post card-post--1">
                               <div class="card-post__image" style="background-image: url({{asset($post->image)}})">
@@ -128,7 +128,7 @@
                                     City: {{$w->city}} 
                                 </td>
                             </tr>
-                            <?php if($p++==6) {break;} ?>
+                            <?php if($p++==4) {break;} ?>
                             @endforeach
                            
                         </tbody>
@@ -162,7 +162,7 @@
                                     City: {{$w->city}} 
                                 </td>
                             </tr>
-                            <?php if($p++==6) {break;} ?>
+                            <?php if($p++==4) {break;} ?>
                             @endforeach
 
                         </tbody>

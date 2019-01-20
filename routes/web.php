@@ -18,7 +18,7 @@ Route::group(['middleware' => 'auth'], function () {
 
 
 Route::get('/', function () {
-    return view('welcome')->with(['posts' => \App\Post::orderBy('created_at', 'desc')->take(8)->get()]);
+    return view('welcome')->with(['posts' => \App\Post::orderBy('created_at', 'desc')->take(5)->get()]);
 });
 
 Auth::routes();
