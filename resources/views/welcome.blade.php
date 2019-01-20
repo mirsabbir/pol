@@ -88,7 +88,7 @@
                             </div>
                             <!-- <span class="text-muted">{{$post->created_at}}</span> -->
                         </div>
-                        <?php if($p++==10) {break;} ?>
+                        <?php if($p++==8) {break;} ?>
                         @endforeach
                         <style>
                             .card-post p{
