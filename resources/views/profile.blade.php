@@ -228,7 +228,7 @@
                                 
                                     <div class="comments" id="cm-{{$post->id}}">
                                         
-                                        <ul v-for="comment in comments">
+                                        <ul v-for="comment in comments.slice(0,5)">
                                             
                                             <li :class="'comment-body'+comment.id"><b><a :href="'/users/'+comment.user.id">@{{comment.user.name}}</a></b> @{{comment.body}}</li>
                                             
@@ -245,7 +245,7 @@
                                     </div>
                                     <script src="{{asset('_js/app.js')}}"></script>
                                     <script>
-                                        var x_{{$post->id}} = new Vue({
+                                         var x_{{$post->id}} = new Vue({
                                             el:'#cm-{{$post->id}}',
                                             data:{
                                                 'comments':{!! json_encode ($post->comments) !!},
@@ -264,6 +264,7 @@
                                                         console.log(d);
                                                         x_{{$post->id}}.comments.push(d);
                                                         x_{{$post->id}}.comment = '';
+                                                        x_{{$post->id}}.comments.reverse();
                                                         
                                                     })
                                                     .catch(function (error) {
@@ -324,7 +325,7 @@
                                                     .then(function (response) {
                                                         var d = response.data;
                                                         console.log(d);
-                                                        $(i).html('<b>'+d.user.name+'</b>&nbsp;'+ d.body);
+                                                        $(i).html('<b><a href="/users/'+{{Auth::id()}}+'">'+d.user.name+'</a>'+'</b>&nbsp;'+ d.body);
                                                         // x.comments.push(d);
                                                     })
                                                     .catch(function (error) {
@@ -334,6 +335,7 @@
                                                 }
                                             },
                                             mounted(){
+                                                this.comments.reverse();
                                                 console.log({!! json_encode ($post->comments) !!});
                                             }
                                            

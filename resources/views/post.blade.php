@@ -129,6 +129,7 @@
                                                         console.log(d);
                                                         x_{{$post->id}}.comments.push(d);
                                                         x_{{$post->id}}.comment = '';
+                                                        x_{{$post->id}}.comments.reverse();
                                                         
                                                     })
                                                     .catch(function (error) {
@@ -189,7 +190,7 @@
                                                     .then(function (response) {
                                                         var d = response.data;
                                                         console.log(d);
-                                                        $(i).html('<b>'+d.user.name+'</b>&nbsp;'+ d.body);
+                                                        $(i).html('<b><a href="/users/'+{{Auth::id()}}+'">'+d.user.name+'</a>'+'</b>&nbsp;'+ d.body);
                                                         // x.comments.push(d);
                                                     })
                                                     .catch(function (error) {
@@ -199,6 +200,7 @@
                                                 }
                                             },
                                             mounted(){
+                                                this.comments.reverse();
                                                 console.log({!! json_encode ($post->comments) !!});
                                             }
                                            

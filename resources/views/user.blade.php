@@ -168,43 +168,101 @@
                                             <script src="{{asset('_js/app.js')}}"></script>
                                             <script>
                                                 
-                                                var ck_{{$post->id}} = new Vue({
-                                                    el: '#like-{{$post->id}}',
-                                                    data: {
-                                                        likes: {{count($post->likes)}},
-                                                        liked: {{App\Like::where('user_id',Auth::id())->where('post_id',$post->id)->count()}}
-                                                    },
-                                                    methods:{
-                                                        submit(){
-                                                            axios.get('/like/{{$post->id}}', {
-                                                                g: 56,
-                                                            })
-                                                            .then(function (response) {
-                                                                console.log(response.data);
-                                                                ck_{{$post->id}}.likes+=response.data;
-                                                                if(response.data==1){
-                                                                    $('#like-{{$post->id}} i').removeClass('g');
-                                                                    $('#like-{{$post->id}} i').addClass('b');
-                                                                } else{
-                                                                    $('#like-{{$post->id}} i').addClass('g');
-                                                                    $('#like-{{$post->id}} i').removeClass('b');
-                                                                }
-                                                            })
-                                                            .catch(function (error) {
-                                                                console.log(error);
-                                                            });
-                                                        }
-                                                    },
-                                                    mounted(){
-                                                        if(this.liked){
-                                                                    $('#like-{{$post->id}} i').removeClass('g');
-                                                                    $('#like-{{$post->id}} i').addClass('b');
-                                                                } else{
-                                                                    $('#like-{{$post->id}} i').addClass('g');
-                                                                    $('#like-{{$post->id}} i').removeClass('b');
-                                                                }
-                                                    },
-                                                });
+                                                var x_{{$post->id}} = new Vue({
+                                            el:'#cm-{{$post->id}}',
+                                            data:{
+                                                'comments':{!! json_encode ($post->comments) !!},
+                                                'comment' : '',
+                                                'id' : {{$post->id}},
+                                                'compose': ''
+                                            },
+                                            methods:{
+                                                submit(){
+                                                    axios.post('/add-comment', {
+                                                        body: x_{{$post->id}}.comment,
+                                                        id: x_{{$post->id}}.id,
+                                                    })
+                                                    .then(function (response) {
+                                                        var d = response.data;
+                                                        console.log(d);
+                                                        x_{{$post->id}}.comments.push(d);
+                                                        x_{{$post->id}}.comment = '';
+                                                        x_{{$post->id}}.comments.reverse();
+                                                        
+                                                    })
+                                                    .catch(function (error) {
+                                                        console.log(error);
+                                                    });
+                                                },
+                                                edit(id,body){
+                                                    var e = '.comment-body'+id;
+                                                    var f = '.edt'+id;
+                                                    var g = '.dlt'+id;
+                                                    var y = '<input type="text" class="box'+id+'" v-model="compose" value="'+body+'">';
+                                                    var xo = '<button class="btn btn-primary '+'upd'+id+'" onclick="x_{{$post->id}}.update('+id+')">Update</button>';
+                                                    $(e).after(xo);
+                                                    $(e).after(y);
+                                                    $(e).hide();
+                                                    $(f).hide();
+                                                    $(g).hide();
+                                                    console.log(x_{{$post->id}}.compose);
+                                                    // $('#edit-btn').hide();
+
+                                                },
+                                                dlt(id){
+                                                    var e = '.upd'+id;
+                                                    var f = '.edt'+id;
+                                                    var g = '.dlt'+id;
+                                                    var h = '.box'+id;
+                                                    var i = '.comment-body'+id;
+                                                    $(e).hide();
+                                                    $(h).hide();
+                                                    $(f).hide();
+                                                    $(g).hide();
+                                                    $(i).hide();
+                                                    axios.post('/comment/delete/'+id, {
+                                                    
+                                                    })
+                                                    .then(function (response) {
+                                                        
+                                                        // x.comments.push(d);
+                                                    })
+                                                    .catch(function (error) {
+                                                        console.log(error);
+                                                    });
+                                                },
+                                                update(id){
+                                                    var e = '.upd'+id;
+                                                    var f = '.edt'+id;
+                                                    var g = '.dlt'+id;
+                                                    var h = '.box'+id;
+                                                    var i = '.comment-body'+id;
+                                                    $(e).hide();
+                                                    $(h).hide();
+                                                    $(f).show();
+                                                    $(g).show();
+                                                    $(i).show();
+                                                    axios.post('/comment/edit/'+id, {
+                                                        body: $(h).val(),
+                                                    })
+                                                    .then(function (response) {
+                                                        var d = response.data;
+                                                        console.log(d);
+                                                        $(i).html('<b><a href="/users/'+{{Auth::id()}}+'">'+d.user.name+'</a>'+'</b>&nbsp;'+ d.body);
+                                                        // x.comments.push(d);
+                                                    })
+                                                    .catch(function (error) {
+                                                        console.log(error);
+                                                    });
+                                                    console.log();
+                                                }
+                                            },
+                                            mounted(){
+                                                this.comments.reverse();
+                                                console.log({!! json_encode ($post->comments) !!});
+                                            }
+                                           
+                                        });
                                             </script>
                                             <style>
                                                 .g{
@@ -222,9 +280,9 @@
                                 
                                     <div class="comments" id="cm-{{$post->id}}">
                                         
-                                        <ul v-for="comment in comments">
+                                        <ul v-for="comment in comments.slice(0,5)">
                                             
-                                            <li :class="'comment-body'+comment.id"><b>@{{comment.user.name}}</b> @{{comment.body}}</li>
+                                            <li :class="'comment-body'+comment.id"><b><a :href="'/users/'+comment.user.id">@{{comment.user.name}}</a></b> @{{comment.body}}</li>
                                             
                                             <button  class="btn btn-primary" :class="'edt'+comment.id" @click="edit(comment.id,comment.body)">Edit</button> 
                                             <button class="btn btn-danger" :class="'dlt'+comment.id" @click="dlt(comment.id)">Detete</button>
