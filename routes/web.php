@@ -29,7 +29,7 @@ Route::get('/edit-profile', 'UserController@edit')->middleware(['auth','verified
 Route::post('/edit-profile', 'UserController@editSave')->middleware(['auth','verified']);
 Route::get('/wall', 'PostController@wall')->middleware(['auth','verified']);
 Route::get('/users/{user}', 'UserController@user')->middleware(['auth','verified']);;
-Route::get('/messages', 'UserController@messages');
+Route::get('/messages', 'UserController@messages')->middleware(['auth','verified']);;
 
 
 
@@ -39,7 +39,7 @@ Route::get('/messages', 'UserController@messages');
 
 
 Route::post('/create-post', 'PostController@create')->middleware(['auth','verified']);;
-Route::get('/posts/{post}', 'PostController@post')->middleware(['auth','verified']);;
+Route::get('/posts/{post}', 'PostController@post');
 Route::post('/posts/{post}/delete', 'PostController@delete')->middleware(['auth','verified']);;
 Route::post('/add-comment', 'PostController@addComment')->middleware(['auth','verified']);;
 Route::post('/comment/edit/{comment}', 'PostController@editComment')->middleware(['auth','verified']);;
@@ -80,11 +80,11 @@ Route::post('/notices/delete/{u}','AdminController@deleteNotice')->middleware(['
 Route::post('/notices/add','AdminController@addNotice')->middleware(['auth','verified']);;
 Route::get('criminal-record-admin','AdminController@criminalRecord')->middleware(['auth','verified']);;
 Route::post('/add-criminal-record', 'AdminController@addCr')->middleware(['auth','verified']);;
-Route::post('/users/make/{user}','AdminController@makeJournalist');
+Route::post('/users/make/{user}','AdminController@makeJournalist')->middleware(['auth','verified']);;
 Route::get('criminal-records', 'AdminController@showCriminal');
-Route::post('criminals/delete/{c}', 'AdminController@deleteCriminal')->middleware('auth');
-Route::get('criminals/{c}', 'AdminController@criminal');
-Route::get('gd-admin', 'AdminController@gd');
+Route::post('criminals/delete/{c}', 'AdminController@deleteCriminal')->middleware(['auth','verified']);
+Route::get('criminals/{c}', 'AdminController@criminal')->middleware(['auth','verified']);;
+Route::get('gd-admin', 'AdminController@gd')->middleware(['auth','verified']);;
 
 
 
@@ -93,13 +93,15 @@ Route::get('gd-admin', 'AdminController@gd');
 Route::get('notices', 'NoticeController@show');
 
 
-Route::get('contact','WebController@contact');
-Route::get('inbox/{u}','WebController@inbox');
-Route::post('/inbox/{u}', 'WebController@messageSave');
+Route::get('contact','WebController@contact')->middleware(['auth','verified']);;
+Route::get('inbox/{u}','WebController@inbox')->middleware(['auth','verified']);;
+Route::post('/inbox/{u}', 'WebController@messageSave')->middleware(['auth','verified']);;
+Route::post('/message/delete/{m}', 'WebController@messageDelete')->middleware(['auth','verified']);;
 
 
 
 
-Route::get('gd', 'WebController@gd');
-Route::post('gd/submit', 'WebController@gdSubmit');
+Route::get('gd', 'WebController@gd')->middleware(['auth','verified']);
+Route::post('gd/submit', 'WebController@gdSubmit')->middleware(['auth','verified']);
+Route::post('gd/delete/{g}', 'WebController@deleteGd')->middleware(['auth','verified']);
 

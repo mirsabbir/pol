@@ -5,7 +5,7 @@
         
           
           <!-- / .main-navbar -->
-          <div class="main-content-container container-fluid px-4 col-md-10" style="margin:auto">
+          <div class="main-content-container" >
             <!-- Page Header -->
             
             <!-- End Page Header -->
@@ -17,7 +17,7 @@
                     <h6 class="m-0">messages:</h6>
                   </div>
                   <div class="card-body p-0 pb-3 text-center">
-                    <table class="table mb-0" style="margin:auto">
+                    <table class="table mb-0" style="margin:auto;">
                       <thead class="bg-light">
                         <tr style="background-color: black" class="text-center">
                           
@@ -27,6 +27,9 @@
                           <th scope="col" class="border-0  text-center">phone</th>
                           <th scope="col" class="border-0 text-center">details</th>
                           <th scope="col" class="border-0  text-center">file</th>
+                          <th scope="col" class="border-0  text-center">
+                            Action
+                          </th>
                         </tr>
                       </thead>
                       <tbody>
@@ -38,7 +41,12 @@
                           <td>{{$m->mobile}}</td>
                           <td>{{$m->body}}</td>
                           <td><a href="/{{$m->file}}">{{$m->file}}</a></td>
-                          
+                          <td>
+                              <form action="/message/delete/{{$m->id}}" method="post" style="display:inline">
+                                @csrf
+                                <button class="btn btn-danger">Delete</button>
+                              </form>
+                          </td>
                           
                         </tr>
                         @endforeach
@@ -53,10 +61,12 @@
             
           </div>
           <style>
-            footer{
-                margin-top:200px;
-            }
-          </style>
+ footer{
+        display:none;
+    }
+
+
+</style>
 
         @endsection
 

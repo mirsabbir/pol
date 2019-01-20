@@ -29,11 +29,7 @@
                                 <h3 style="color: white"> Post Details:</h3>
                                 <textarea class="form-control" style="border-radius: 20px;" type="textarea" id="message" name="body" placeholder="Write something. . ." rows="2"></textarea>
                             </div>
-<style>
-    footer{
-        margin-top:150px;
-    }
-</style>
+ 
                             
 
                         
@@ -60,6 +56,10 @@
     
 </div>
                 
-
+<style>
+ footer{
+        display:none;
+    }
+</style>
 
 @endsection

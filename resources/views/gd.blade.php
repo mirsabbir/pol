@@ -69,4 +69,12 @@
         </div>
       </section>
       <!-- Page Wrapper End -->
+<style>
+ footer{
+        display:none;
+    }
+
+
+</style>
+     
       @endsection

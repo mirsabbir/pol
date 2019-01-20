@@ -17,7 +17,7 @@
 	<div class="limiter">
 		<div class="container-login100">
 			<div class="wrap-login100">
-				<div class="login100-form-title" style="background-image: url(img/bg-01.jpg);">
+				<div class="login100-form-title" style="background-image: url(50340638_377596063004037_7250771404084215808_n.jpg);">
 					<span class="login100-form-title-1">
 						Sign Up
 					</span>

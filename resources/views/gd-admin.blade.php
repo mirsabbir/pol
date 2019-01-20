@@ -23,6 +23,7 @@
                           <th scope="col" class="border-0">Address</th>
                           <th scope="col" class="border-0">Phone</th>
                           <th scope="col" class="border-0">details</th>
+                          <th scope="col" class="border-0">Action</th>
                           
                         </tr>
                       </thead>
@@ -41,6 +42,12 @@
                           <td>{{$m->address}}</td>
                           <td>{{$m->phone}}</td>
                           <td>{{$m->details}}</td>
+                          <td>
+                            <form action="/gd/delete/{{$m->id}}" method="post">
+                              @csrf
+                              <button class="btn btn-danger">Delete</button>
+                            </form>
+                          </td>
                         </tr>
                         @endforeach
                       </tbody>

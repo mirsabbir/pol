@@ -11,6 +11,7 @@
                                 <div id="featured-post-slides" class="carousel slide d-flex flex-wrap" data-ride="carousel">
 
                                     <div class="carousel-inner">
+                                        <!-- single post -->
                                         @for($i=0;$i < 1;$i++)
                                             <?php $post = $posts[$i]; ?>
                                             <div class="carousel-item active bg-img" style="background-image: url({{asset($post->image)}})">

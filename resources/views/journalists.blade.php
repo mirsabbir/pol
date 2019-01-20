@@ -39,7 +39,7 @@
                         <tr>
                           <td>
                             <div class="card-post__author d-flex">
-                              <a href="/users/{{$user->id}}" class="card-post__author-avatar card-post__author-avatar--small" style="background-image: url('/{{$user->image}}');">Written by Anna Kunis</a>
+                              <a href="/users/{{$user->id}}" class="card-post__author-avatar card-post__author-avatar--small" style="background-image: url('/{{$user->image}}');">user</a>
                             </div>
                           </td>
                           <td>{{$user->name}}</td>

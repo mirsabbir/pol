@@ -198,9 +198,9 @@
                                 
                                     <div class="comments" id="cm-{{$post->id}}">
                                         
-                                        <ul v-for="comment in comments">
+                                        <ul v-for="comment in comments.slice(0,5)">
                                             
-                                            <li :class="'comment-body'+comment.id"><b>@{{comment.user.name}}</b> @{{comment.body}}</li>
+                                            <li :class="'comment-body'+comment.id"><b><a :href="'/users/'+comment.user.id">@{{comment.user.name}}</a></b> @{{comment.body}}</li>
                                             
                                             <button  class="btn btn-primary" :class="'edt'+comment.id" @click="edit(comment.id,comment.body)">Edit</button> 
                                             <button class="btn btn-danger" :class="'dlt'+comment.id" @click="dlt(comment.id)">Detete</button>
@@ -234,6 +234,7 @@
                                                         console.log(d);
                                                         x_{{$post->id}}.comments.push(d);
                                                         x_{{$post->id}}.comment = '';
+                                                        x_{{$post->id}}.comments.reverse();
                                                         
                                                     })
                                                     .catch(function (error) {
@@ -304,6 +305,7 @@
                                                 }
                                             },
                                             mounted(){
+                                                this.comments.reverse();
                                                 console.log({!! json_encode ($post->comments) !!});
                                             }
                                            

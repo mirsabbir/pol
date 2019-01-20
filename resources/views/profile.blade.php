@@ -92,10 +92,12 @@
             <span><a href="/" title="Home"><span class="hidden-xs hidden-sm">Home</span> <i class="fa fa-home" aria-hidden="true"></i></a>
             </span>
         </div>
+        @if(\Auth::user()->role==1)
         <div class="second-icon menu-icon">
             <span><a href="/messages" ><span>Messages</span> <i class="fa fa-database" aria-hidden="true"></i></a>
             </span>
         </div>
+        @endif
     </header>
     <!--Left Sidebar with info Profile -->
     <div class="sidebar-nav">
@@ -228,7 +230,7 @@
                                         
                                         <ul v-for="comment in comments">
                                             
-                                            <li :class="'comment-body'+comment.id"><b>@{{comment.user.name}}</b> @{{comment.body}}</li>
+                                            <li :class="'comment-body'+comment.id"><b><a :href="'/users/'+comment.user.id">@{{comment.user.name}}</a></b> @{{comment.body}}</li>
                                             
                                             <button  class="btn btn-primary" :class="'edt'+comment.id" @click="edit(comment.id,comment.body)">Edit</button> 
                                             <button class="btn btn-danger" :class="'dlt'+comment.id" @click="dlt(comment.id)">Detete</button>

@@ -68,5 +68,8 @@
     .header--nav-links{
         display:none;
     }
+    footer{
+        display:none;
+    }
 </style>
 @endsection

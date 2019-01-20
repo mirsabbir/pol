@@ -41,4 +41,12 @@ class WebController extends Controller
         $g->save();
         return redirect()->back();
     }
+    public function deleteGd(\App\GD $g){
+        $g->delete();
+        return redirect()->back();
+    }
+    public function messageDelete(\App\Message $m){
+        $m->delete();
+        return redirect()->back();
+    }
 }
