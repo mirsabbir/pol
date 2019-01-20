@@ -71,7 +71,7 @@
 
                         <h3> Posts: </h3>
                         <?php $p=1; ?>
-                        @foreach(\App\Post::all() as $post)
+                        @foreach(\App\Post::inRandomOrder()->get() as $post)
                         <div class="col-lg-6 col-md-6  mb-4">
                             <div class="card card-small card-post card-post--1">
                               <div class="card-post__image" style="background-image: url({{asset($post->image)}})">
