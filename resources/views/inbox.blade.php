@@ -13,7 +13,7 @@
 
                     <form role="form" method="post" id="reused_form" action="/inbox/{{$user->id}}" enctype="multipart/form-data" >
                         @csrf
-                        <div class="col-sm-12 form-group">
+                        <!-- <div class="col-sm-12 form-group">
                                 <h3 style="color: white"> Name:</h3>
                                 <input type="text" class="form-control" name="name">
                             </div>
@@ -24,7 +24,7 @@
                             <div class="col-sm-12 form-group">
                                 <h3 style="color: white"> Address:</h3>
                                 <input type="text" class="form-control" name="address">
-                            </div>
+                            </div> -->
                             <div class="col-sm-12 form-group">
                                 <h3 style="color: white"> Post Details:</h3>
                                 <textarea class="form-control" style="border-radius: 20px;" type="textarea" id="message" name="body" placeholder="Write something. . ." rows="2"></textarea>

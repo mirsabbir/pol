@@ -29,17 +29,18 @@
                       <tbody>
                       @foreach(App\GD::all() as $m)
                         <tr>
+                        <?php 
+                          $m->image = \App\User::where('mobile',$m->phone)->first()->image;
+                        ?>
                           <td>
                             <div class="card-post__author d-flex">
-                              <a href="/criminals/{{$m->id}}" class="card-post__author-avatar card-post__author-avatar--small" style="background-image: url('/{{$m->image}}');"></a>
+                              <a href="/users/{{$m->id}}" class="card-post__author-avatar card-post__author-avatar--small" style="background-image: url('/{{$m->image}}');"></a>
                             </div>
                           </td>
                           <td>{{$m->name}}</td>
                           <td>{{$m->address}}</td>
                           <td>{{$m->phone}}</td>
                           <td>{{$m->details}}</td>
-                          
-                          
                         </tr>
                         @endforeach
                       </tbody>

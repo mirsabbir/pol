@@ -106,14 +106,14 @@
 
                             <div class="filter--nav pb--50 clearfix" style="margin-right: 50px">
                                 <div class="filter--options float--right">
-                                    <label>
+                                    <!-- <label>
                                         <span class="fs--14 ff--primary fw--500 text-darker">Show By :</span>
                                         <select name="membersfilter" class="form-control form-sm" data-trigger="selectmenu">
                                             <option value="last-active" selected>Todays Post</option>
                                             <option value="new-registered">Last Month</option>
                                             <option value="alphabetical">Last Year</option>
                                         </select>
-                                    </label>
+                                    </label> -->
                                 </div>
                             </div>
 

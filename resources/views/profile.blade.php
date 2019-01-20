@@ -360,7 +360,7 @@
                             <li><b>Name : </b> {{$user->name}}</li>
                             <li><b>Username:</b> {{$user->username}}</li>
                             <li><b>Age : </b> {{$user->age}}</li>
-                            <li><b>National ID : </b> {{$user->nid}} </li>
+                            <!-- <li><b>National ID : </b> {{$user->nid}} </li> -->
                             <li><b>Sex : </b> {{$user->sex}} </li>
                             <li><b>Email : </b> {{$user->email}} </li>
                             <li><b>Mobile : </b> {{$user->mobile}} </li>

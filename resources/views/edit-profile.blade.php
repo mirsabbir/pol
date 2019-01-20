@@ -36,7 +36,7 @@
                             <label for="age">Age :</label>
                           </div>
                           <div class="col-75-form">
-                            <input type="number" id="lname" name="age" value="{{$user->age}}">
+                            <input type="number" class="form-control" id="lname" name="age" placeholder="Age" value="{{$user->age}}">
                           </div>
                         </div>
 

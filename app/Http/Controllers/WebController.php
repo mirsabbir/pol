@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 class WebController extends Controller
 {
     public function contact(){
-        return view('contact');
+        return view('contact')->with(['user'=> \Auth::user()]);
     }
     public function inbox(\App\User $u){
         return view('inbox')->with(['user'=>$u]);
@@ -21,9 +21,9 @@ class WebController extends Controller
             $file->storeAs('',$name,'public');
             $msg->file = $name;
         }
-        $msg->name = $r->name;
-        $msg->address = $r->address;
-        $msg->mobile = $r->mobile;
+        $msg->name = \Auth::user()->name;
+        $msg->address = \Auth::user()->address;
+        $msg->mobile = \Auth::user()->mobile;
         
         $msg->user_id = $u->id;
         $msg->save();
@@ -34,9 +34,9 @@ class WebController extends Controller
     }
     public function gdSubmit(\Illuminate\Http\Request $r){
         $g = new \App\GD;
-        $g->name = $r->name;
-        $g->address = $r->address;
-        $g->phone = $r->phone;
+        $g->name = \Auth::user()->name;
+        $g->address = \Auth::user()->address;
+        $g->phone = \Auth::user()->phone;
         $g->details = $r->details;
         $g->save();
         return redirect()->back();

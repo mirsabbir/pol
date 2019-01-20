@@ -126,11 +126,13 @@
                                 
                             </li> -->
 
-                            <li><a href="/contact"><span>Contact with Journalist</span></a></li>
+                            
                             
                             @if(!Auth::check())
+                            
                             <li><a href="/login"><span>Login</span></a></li>
                             @else
+                            <li><a href="/contact"><span>Contact with Journalist</span></a></li>
                             <li><a href="/profile"><span>Profile</span></a></li>
                             <li>
                                 <form action="/logout" method = "post">

@@ -13,7 +13,7 @@
 
               <form action="/gd/submit" style="padding: 10px" method="post" enctype="multipart/form-data">
                 @csrf
-                <div class="row-form">
+                <!-- <div class="row-form">
                   <div class="col-25-form">
                     <label for="fname">Full Name :</label>
                   </div>
@@ -41,7 +41,7 @@
                   <div class="col-75-form">
                     <input type="text" id="fname" name="address" placeholder="Address..">
                   </div>
-                </div>
+                </div> -->
                 <div class="row-form">
                   <div class="col-25-form">
                     <label for="fname">Details :</label>

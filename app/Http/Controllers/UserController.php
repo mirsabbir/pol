@@ -12,7 +12,6 @@ class UserController extends Controller
             return view('profile')->with(['r'=>$r,'user'=>$user,'ok'=> \Auth::id()==$user->id, 'posts'=>$user->posts()->orderBy('created_at', 'desc')->where('title','like','%'.$r->q.'%')->with('comments.user')->get()]);
         }
         return view('profile')->with(['r'=>$r,'user'=>$user,'ok'=> \Auth::id()==$user->id, 'posts'=>$user->posts()->orderBy('created_at', 'desc')->with('comments.user')->get()]);
-        return view('profile')->with(['user'=>\Auth::user(), 'posts'=>\Auth::user()->posts()->orderBy('created_at', 'desc')->with('comments.user')->get()]);
     
     }
     public function dp(\Illuminate\Http\Request $request){

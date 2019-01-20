@@ -101,13 +101,13 @@
                 </a>
               </li>
 
-              <li class="nav-item">
+              <!-- <li class="nav-item">
                 <a class="nav-link " href="#">
                   <i class="material-icons">table_chart</i>
                   <span> Reward List</span>
                 </a>
               </li>
-          
+           -->
             </ul>
           </div>
         </aside>
