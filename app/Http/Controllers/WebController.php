@@ -36,7 +36,7 @@ class WebController extends Controller
         $g = new \App\GD;
         $g->name = \Auth::user()->name;
         $g->address = \Auth::user()->address;
-        $g->phone = \Auth::user()->phone;
+        $g->phone = \Auth::user()->mobile;
         $g->details = $r->details;
         $g->save();
         return redirect()->back();
