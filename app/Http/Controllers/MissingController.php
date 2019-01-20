@@ -14,7 +14,7 @@ class MissingController extends Controller
             $res = $res->where('city','like','%'.$r->qc.'%');   
         }
         if($r->qs){
-            $res = $res->where('sex','like','%'.$r->qs.'%');
+            $res = $res->where('sex','=',$r->qs);
         }
         if($r->qa){
             $res = $res->where('age','=',$r->qa);
@@ -23,7 +23,7 @@ class MissingController extends Controller
             $res = $res->where('dob','=',$r->qd);
         }
         
-        return view('missings')->with(['r'=>$r,'ms'=>$res->get()]);
+        return view('missings')->with(['r'=>$r,'ms'=>$res->paginate(9)]);
     }
     public function add(){
         return view('add-missing');

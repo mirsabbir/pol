@@ -93,7 +93,7 @@ class AdminController extends Controller
             $res = $res->where('city','like','%'.$r->qc.'%');   
         }
         if($r->qs){
-            $res = $res->where('sex','like','%'.$r->qs.'%');
+            $res = $res->where('sex','like',$r->qs);
         }
         if($r->qa){
             $res = $res->where('age','=',$r->qa);

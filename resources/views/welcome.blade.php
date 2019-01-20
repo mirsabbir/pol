@@ -80,7 +80,12 @@
                                 <h5 class="card-title">
                                   <a class="text-fiord-blue" href="/posts/{{$post->id}}">{{substr($post->title,0,40)}}</a>
                                 </h5>
-                                <p class="card-text d-inline-block mb-3">{!! substr(strip_tags($post->body),0,400) !!}</p>
+                                <?php
+                                    $st ='';
+                                    if(ctype_alnum($post->body)) $st = substr(strip_tags($post->body),0,186);
+                                    else $st = substr(strip_tags($post->body),0,400);
+                                ?>
+                                <p class="card-text d-inline-block mb-3">{!! $st !!}</p>
                                 <span class="text-muted">{{$post->created_at}}</span>
                               </div>
                             </div>

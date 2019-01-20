@@ -52,7 +52,7 @@
                             </div>
                             <!-- Member Items End -->
                             <!-- Page Count Start -->
-                            <div class="page--count pt--30">
+                            <!-- <div class="page--count pt--30">
                                 <label class="ff--primary fs--14 fw--500 text-darker">
                                     <span>Viewing</span>
                                     <a href="#" class="btn-link"><i class="fa fa-caret-left"></i></a>
@@ -60,7 +60,8 @@
                                     <a href="#" class="btn-link"><i class="fa fa-caret-right"></i></a>
                                     <span>of 1</span>
                                 </label>
-                            </div>
+                            </div> -->
+                            {{$ms->links()}}
                             <!-- Page Count End -->
                         </div>
                     </div>
@@ -73,12 +74,12 @@
                             <!-- Buddy Finder Widget Start -->
                             <div class="buddy-finder--widget">
                                 <form   >
-                                    <div class="row">
+                                <div class="row">
                                         <div class="col-xs-6 col-xxs-12">
                                             <div class="form-group">
                                                 <label>
                                                     <span class="text-darker ff--primary fw--500">Name :</span>
-                                                    <input style="background-color: #F5F5F5" type="text" name="qn" placeholder="Name">
+                                                    <input style="background-color: #F5F5F5" class="form-control" type="text" name="qn" placeholder="Name">
                                                 </label>
                                             </div>
                                         </div>
@@ -87,8 +88,8 @@
                                             <div class="form-group">
                                                 <label>
                                                     <span class="text-darker ff--primary fw--500">Gender :</span>
-                                                    <select name="qs" class="form-control form-sm" >
-                                                    <option value="">--</option>
+                                                    <select class="form-control" name="qs" class="form-control form-sm" >
+                                                        <option value="">--</option>
                                                         <option value="female">Female</option>
                                                         <option value="male">Male</option>
                                                         <option value="other">Other</option>
@@ -100,28 +101,23 @@
                                             <div class="form-group">
                                                 <label>
                                                     <span class="text-darker ff--primary fw--500">Age :</span>
-                                                    <input type="text" name="qa" placeholder="Age">
+                                                    <input type="text" class="form-control" name="qa" placeholder="Age">
                                                 </label>
                                             </div>
                                         </div>
-                                        <!-- <div class="col-xs-6 col-xxs-12">
+                                        <div class="col-xs-6 col-xxs-12">
                                             <div class="form-group">
                                                 <label>
                                                     <span class="text-darker ff--primary fw--500">City</span>
-                                                    <select name="qc" class="form-control form-sm" >
-                                                    <option value="">--</option>
-                                                        <option value="Sylhet">Sylhet</option>
-                                                        <option value="Dhaka">Dhaka</option>
-                                                        <option value="Dhaka">Chittagong</option>
-                                                    </select>
+                                                    <input style="background-color: #F5F5F5" class="form-control" name="qc" type="text" placeholder="City">
                                                 </label>
                                             </div>
-                                        </div> -->
+                                        </div>
                                         <div class="col-xs-12">
                                             <div class="form-group">
                                                 <label>
                                                     <span class="text-darker ff--primary fw--500">Date of Birth</span>
-                                                    <input style="background-color: #F5F5F5" name="dob" type="text" placeholder="DD/MM/YEAR">
+                                                    <input class="form-control" style="background-color: #F5F5F5" name="qd" type="text" placeholder="DD/MM/YEAR">
                                                     
                                                 </label>
                                             </div>
