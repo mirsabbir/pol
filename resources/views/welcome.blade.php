@@ -91,7 +91,7 @@
                         @endforeach
                         <style>
                             .card-post p{
-                                height:140px;
+                                height:136px;
                                 overflow:hidden;
                             }
                         </style>
