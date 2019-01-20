@@ -85,12 +85,13 @@
                                 <span class="text-muted">{{$post->created_at}}</span>
                               </div>
                             </div>
+                            <!-- <span class="text-muted">{{$post->created_at}}</span> -->
                         </div>
                         <?php if($p++==10) {break;} ?>
                         @endforeach
                         <style>
-                            .card-post{
-                                height:382px;
+                            .card-post p{
+                                height:200px;
                                 overflow:hidden;
                             }
                         </style>
