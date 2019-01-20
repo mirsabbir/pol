@@ -32,10 +32,11 @@
                         <tr>
                         <?php 
                           $m->image = \App\User::where('mobile',$m->phone)->first()->image;
+                          $p = \App\User::where('mobile',$m->phone)->first()->id;
                         ?>
                           <td>
                             <div class="card-post__author d-flex">
-                              <a href="/users/{{$m->id}}" class="card-post__author-avatar card-post__author-avatar--small" style="background-image: url('/{{$m->image}}');"></a>
+                              <a href="/users/{{$p}}" class="card-post__author-avatar card-post__author-avatar--small" style="background-image: url('/{{$m->image}}');"></a>
                             </div>
                           </td>
                           <td>{{$m->name}}</td>
