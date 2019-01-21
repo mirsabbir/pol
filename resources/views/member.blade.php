@@ -67,8 +67,8 @@
                                                 <td> {{$w->city}} </td>
                                             </tr>
                                             <tr>
-                                                <th>Address</th>
-                                                <td> {{$w->address}} </td>
+                                                <th>Date of birth</th>
+                                                <td> {{$w->dob}} </td>
                                             </tr>
                                             
                                         </table>
