@@ -23,7 +23,7 @@ class MissingController extends Controller
             $res = $res->where('dob','=',$r->qd);
         }
         
-        return view('missings')->with(['r'=>$r,'ms'=>$res->paginate(9)]);
+        return view('missings')->latest()->with(['r'=>$r,'ms'=>$res->paginate(9)]);
     }
     public function add(){
         return view('add-missing');
