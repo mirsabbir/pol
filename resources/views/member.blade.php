@@ -62,6 +62,14 @@
                                                 <th>Eye Color</th>
                                                 <td> {{$w->eye}} </td>
                                             </tr>
+                                            <tr>
+                                                <th>City </th>
+                                                <td> {{$w->city}} </td>
+                                            </tr>
+                                            <tr>
+                                                <th>Address</th>
+                                                <td> {{$w->address}} </td>
+                                            </tr>
                                             
                                         </table>
                                     </div>
