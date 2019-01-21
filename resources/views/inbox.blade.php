@@ -10,7 +10,19 @@
 
             <!-- <div class="row"> -->
                 <div class=" " id="form_container">
-
+                @if ($errors->any())
+					<div class="">
+						<ul>
+							@foreach ($errors->all() as $error)
+								<!-- <li class="text-center">{{ $error }}</li> -->
+								<div class="alert alert-danger fade in">
+									<a href="#" class="close" data-dismiss="alert">&times;</a>
+									<strong>Error!</strong> {{$error}}
+								</div>
+							@endforeach
+						</ul>
+					</div>
+				@endif
                     <form role="form" method="post" id="reused_form" action="/inbox/{{$user->id}}" enctype="multipart/form-data" >
                         @csrf
                         <!-- <div class="col-sm-12 form-group">

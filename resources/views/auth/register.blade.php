@@ -23,10 +23,14 @@
 					</span>
 				</div>
 				@if ($errors->any())
-					<div class="alert alert-danger">
+					<div class="">
 						<ul>
 							@foreach ($errors->all() as $error)
-								<li>{{ $error }}</li>
+								<!-- <li class="text-center">{{ $error }}</li> -->
+								<div class="alert alert-danger fade in">
+									<a href="#" class="close" data-dismiss="alert">&times;</a>
+									<strong>Error!</strong> {{$error}}
+								</div>
 							@endforeach
 						</ul>
 					</div>

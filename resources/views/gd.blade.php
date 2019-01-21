@@ -10,7 +10,19 @@
 
 
             <div class="col-sm-10 card card-small mb-4 well missing_form" style="margin-bottom: 10px ; margin-left: 90px">
-
+            @if ($errors->any())
+					<div class="">
+						<ul>
+							@foreach ($errors->all() as $error)
+								<!-- <li class="text-center">{{ $error }}</li> -->
+								<div class="alert alert-danger fade in">
+									<a href="#" class="close" data-dismiss="alert">&times;</a>
+									<strong>Error!</strong> {{$error}}
+								</div>
+							@endforeach
+						</ul>
+					</div>
+				@endif
               <form action="/gd/submit" style="padding: 10px" method="post" enctype="multipart/form-data">
                 @csrf
                 <!-- <div class="row-form">

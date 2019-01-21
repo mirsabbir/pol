@@ -42,6 +42,9 @@ class AdminController extends Controller
     }
     public function addNotice(\Illuminate\http\Request $r){
         if(\Auth::user()->role!=2) abort(404);
+        $validatedData = $r->validate([
+            'notice' => 'required',
+        ]);
         $file = $r->file('notice');
         $file->move(public_path(''),$file->getClientOriginalName());
         $n = new \App\Notice;
@@ -55,6 +58,21 @@ class AdminController extends Controller
     }
     public function addCr(\Illuminate\Http\Request $request){
         if(\Auth::user()->role!=2) abort(404);
+        $validatedData = $request->validate([
+            'fn' => 'required',
+            'age' => 'required|numeric',
+            'country' => 'required',
+            'city' => 'required',
+            'phone' => 'required|numeric',
+            'sex' => 'required',
+            'dsc' => 'required',
+            'eye' => 'required',
+            'skin' => 'required',
+            'height' => 'required',
+            'email' => 'required|email',
+            'address' => 'required',
+            'dob' => 'required',
+        ]);
         $w = new \App\Criminal ;
         $w->fn = $request->fn;
         $w->age = $request->age;

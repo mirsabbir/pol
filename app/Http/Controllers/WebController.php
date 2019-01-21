@@ -13,6 +13,9 @@ class WebController extends Controller
         return view('inbox')->with(['user'=>$u]);
     }
     public function messageSave(\Illuminate\Http\Request $r,\App\user $u){
+        $validatedData = $r->validate([
+            'body' => 'required',
+        ]);
         $msg = new \App\Message;
         $msg->body = $r->body;
         $file = $r->f;
@@ -33,6 +36,9 @@ class WebController extends Controller
         return view('gd');
     }
     public function gdSubmit(\Illuminate\Http\Request $r){
+        $validatedData = $r->validate([
+            'details' => 'required',
+        ]);
         $g = new \App\GD;
         $g->name = \Auth::user()->name;
         $g->address = \Auth::user()->address;

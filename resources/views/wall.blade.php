@@ -12,15 +12,18 @@
                             <!-- <div class="row"> -->
                                 <div class="col-md-12 " id="form_container">
                                 @if ($errors->any())
-    <div class="alert alert-danger">
-        <ul>
-            @foreach ($errors->all() as $error)
-                <li>{{ $error }}</li>
-            @endforeach
-        </ul>
-    </div>
-@endif
-
+					<div class="">
+						<ul>
+							@foreach ($errors->all() as $error)
+								<!-- <li class="text-center">{{ $error }}</li> -->
+								<div class="alert alert-danger fade in">
+									<a href="#" class="close" data-dismiss="alert">&times;</a>
+									<strong>Error!</strong> {{$error}}
+								</div>
+							@endforeach
+						</ul>
+					</div>
+				@endif
 @if(\Auth::user()->role==1)
                                     <form role="form" method="post" id="reused_form" method="post" action="/create-post" enctype="multipart/form-data">
                                         <div class="row">

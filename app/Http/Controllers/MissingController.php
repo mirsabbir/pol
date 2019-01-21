@@ -39,6 +39,21 @@ class MissingController extends Controller
         return redirect()->back();
     }
     public function addMissing(\Illuminate\Http\Request $request){
+        $validatedData = $request->validate([
+            'fn' => 'required',
+            'age' => 'required|numeric',
+            'country' => 'required',
+            'city' => 'required',
+            'phone' => 'required|numeric',
+            'sex' => 'required',
+            'dsc' => 'required',
+            'eye' => 'required',
+            'skin' => 'required',
+            'height' => 'required',
+            'email' => 'required|email',
+            'address' => 'required',
+            'dob' => 'required',
+        ]);
         $w = new \App\Missing ;
         $w->fn = $request->fn;
         $w->age = $request->age;
